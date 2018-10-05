@@ -35,7 +35,7 @@ public class OrderItem {
     private int id;
     
     @Column(nullable = false)
-    private int amount;
+    private int quantity;
     
     @Column(nullable = false)
     private BigDecimal productPriceAtOrderTime;
