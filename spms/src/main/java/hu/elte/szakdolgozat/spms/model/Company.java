@@ -22,16 +22,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class Company {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
-    
+public class Company extends BaseEntity{    
     @Column(nullable = false)
     private String name;
     
     @Column(nullable = false)
-    private boolean isActive;
+    private boolean active;
     
     @JoinColumn
     @ManyToOne(targetEntity = User.class)

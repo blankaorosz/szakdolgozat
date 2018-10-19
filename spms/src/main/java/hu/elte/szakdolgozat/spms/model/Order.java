@@ -6,7 +6,6 @@
 package hu.elte.szakdolgozat.spms.model;
 
 import java.util.Date;
-import java.util.List;
 import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,13 +23,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class Order {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;    
-    
+public class Order extends BaseEntity{    
     @DateTimeFormat(pattern = "MM-dd-yyyy")
-    private Date date;
+    private Date orderDate;
     
     @JoinColumn
     @ManyToOne(targetEntity = Company.class)

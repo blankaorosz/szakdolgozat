@@ -28,10 +28,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class Comment {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
+public class Comment extends BaseEntity{
     
     @Column(nullable = false)
     private String nameFrom;
@@ -40,7 +37,7 @@ public class Comment {
     private String nameTo;
     
     @Column(nullable = false)
-    private boolean isRead;
+    private boolean checked;
     
     @JoinColumn
     @ManyToOne(targetEntity = Plan.class)

@@ -10,9 +10,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -32,11 +29,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class Plan {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
-    
+public class Plan extends BaseEntity{
     @Column
     @Enumerated(EnumType.STRING)
     private PlanStatus status;
@@ -55,4 +48,7 @@ public class Plan {
     
     @OneToMany(targetEntity = Comment.class, mappedBy = "plan")
     private List<Comment> comments;
+
+    @OneToMany(targetEntity = PlanPerCompany.class, mappedBy = "plan")
+    private List<PlanPerCompany> planPerCompanyList;
 }

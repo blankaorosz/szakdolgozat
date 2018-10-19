@@ -1,0 +1,16 @@
+#page-header{
+    /*background-image: url("../images/logo.png");*/
+    /*background-repeat: no-repeat;*/
+    /*background-size: 90px 90px;*/
+    height: 150px;
+    background-color: #d80d0d;
+    /*background-position: left;*/
+}
+
+
+#header-img {
+    height: 90px;
+    width: 90px;
+    padding-left: 30px;
+    padding-top: 30px;
+}

@@ -6,13 +6,8 @@
 package hu.elte.szakdolgozat.spms.model;
 
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -28,14 +23,29 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class Period {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
-    
+public class Period extends BaseEntity{
     @Column(nullable = false)
-    private boolean isPlanningPeriod;
-    
+    private boolean planningEnabled;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private MonthName begingMounth;
+
+    public enum MonthName {
+        JAN(0), FEB(1), MAR(2), APR(3), MAY(4),
+        JUN(5), JUL(6), AUG(7), SEP(8), OCT(9), NOV(10), DEC(11);
+
+        private int index;
+
+        MonthName(int index) {
+            this.index = index;
+        }
+
+        public int getIndex() {
+            return index;
+        }
+    }
+
     @Column(nullable = false)
     private int yearPlanned;
     
