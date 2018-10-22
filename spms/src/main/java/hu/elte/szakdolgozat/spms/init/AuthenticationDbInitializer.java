@@ -5,9 +5,9 @@
  */
 package hu.elte.szakdolgozat.spms.init;
 
-import hu.elte.szakdolgozat.spms.model.Right;
-import hu.elte.szakdolgozat.spms.model.Role;
-import hu.elte.szakdolgozat.spms.model.User;
+import hu.elte.szakdolgozat.spms.model.entity.Right;
+import hu.elte.szakdolgozat.spms.model.entity.Role;
+import hu.elte.szakdolgozat.spms.model.entity.User;
 import hu.elte.szakdolgozat.spms.repository.RightRepository;
 import hu.elte.szakdolgozat.spms.repository.RoleRepository;
 import hu.elte.szakdolgozat.spms.repository.UserRepository;

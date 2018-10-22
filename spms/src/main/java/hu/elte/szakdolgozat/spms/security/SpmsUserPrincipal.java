@@ -5,11 +5,10 @@
  */
 package hu.elte.szakdolgozat.spms.security;
 
-import hu.elte.szakdolgozat.spms.model.Right;
-import hu.elte.szakdolgozat.spms.model.User;
+import hu.elte.szakdolgozat.spms.model.entity.User;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -70,7 +69,7 @@ public class SpmsUserPrincipal implements UserDetails{
         return true;
     }
 
-    public User getFamily() {
+    public User getUser() {
         return user;
     }
     

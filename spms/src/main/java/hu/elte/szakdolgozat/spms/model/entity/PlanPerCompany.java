@@ -1,4 +1,4 @@
-package hu.elte.szakdolgozat.spms.model;
+package hu.elte.szakdolgozat.spms.model.entity;
 
 import javax.persistence.*;
 

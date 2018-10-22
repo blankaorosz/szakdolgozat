@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package hu.elte.szakdolgozat.spms.model;
+package hu.elte.szakdolgozat.spms.model.entity;
 
-import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -21,23 +20,23 @@ import lombok.NoArgsConstructor;
  * @author Blanka Orosz
  */
 @Entity
-@Table(name = "ORDER_ITEM")
+@Table(name = "COMMENT")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class OrderItem extends BaseEntity{         
-    @Column(nullable = false)
-    private int quantity;
+public class Comment extends BaseEntity{
     
     @Column(nullable = false)
-    private BigDecimal productPriceAtOrderTime;
+    private String nameFrom;
+    
+    @Column(nullable = false)
+    private String nameTo;
+    
+    @Column(nullable = false)
+    private boolean checked;
     
     @JoinColumn
-    @ManyToOne(targetEntity = Order.class)
-    private Order order;
-    
-    @JoinColumn
-    @ManyToOne(targetEntity = Product.class)
-    private Product product;
+    @ManyToOne(targetEntity = Plan.class)
+    private Plan plan;
 }

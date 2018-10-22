@@ -5,7 +5,7 @@
  */
 package hu.elte.szakdolgozat.spms.security;
 
-import hu.elte.szakdolgozat.spms.model.User;
+import hu.elte.szakdolgozat.spms.model.entity.User;
 import hu.elte.szakdolgozat.spms.repository.UserRepository;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;

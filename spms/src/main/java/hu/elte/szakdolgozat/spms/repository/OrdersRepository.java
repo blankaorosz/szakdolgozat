@@ -5,8 +5,8 @@
  */
 package hu.elte.szakdolgozat.spms.repository;
 
-import hu.elte.szakdolgozat.spms.model.Company;
-import hu.elte.szakdolgozat.spms.model.Order;
+import hu.elte.szakdolgozat.spms.model.entity.Company;
+import hu.elte.szakdolgozat.spms.model.entity.Order;
 import java.util.Date;
 import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;

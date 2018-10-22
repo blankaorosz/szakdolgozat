@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package hu.elte.szakdolgozat.spms.model;
+package hu.elte.szakdolgozat.spms.model.entity;
 
 import java.math.BigDecimal;
 import javax.persistence.Column;

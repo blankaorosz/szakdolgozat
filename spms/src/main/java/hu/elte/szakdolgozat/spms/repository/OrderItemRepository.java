@@ -5,9 +5,9 @@
  */
 package hu.elte.szakdolgozat.spms.repository;
 
-import hu.elte.szakdolgozat.spms.model.Order;
-import hu.elte.szakdolgozat.spms.model.OrderItem;
-import hu.elte.szakdolgozat.spms.model.Product;
+import hu.elte.szakdolgozat.spms.model.entity.Order;
+import hu.elte.szakdolgozat.spms.model.entity.OrderItem;
+import hu.elte.szakdolgozat.spms.model.entity.Product;
 import java.math.BigDecimal;
 import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;

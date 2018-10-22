@@ -1,8 +1,10 @@
 package hu.elte.szakdolgozat.spms.controller;
 
-import hu.elte.szakdolgozat.spms.model.Period;
+import hu.elte.szakdolgozat.spms.model.entity.Period;
+import hu.elte.szakdolgozat.spms.model.entity.User;
 import hu.elte.szakdolgozat.spms.repository.PeriodRepository;
-import hu.elte.szakdolgozat.spms.repository.PlanPerCompanyRepository;
+import hu.elte.szakdolgozat.spms.service.PlanningService;
+import hu.elte.szakdolgozat.spms.util.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,39 +18,20 @@ import java.util.List;
 @RequestMapping("/planningPage")
 public class PlanningController {
    @Autowired
-   private PeriodRepository periodRepository;
+   private PlanningService planningService;
 
    @RequestMapping(method = RequestMethod.GET)
    public String getPlanningPage(ModelMap model) {
+      User currentUser = SecurityUtil.getLoggedInUser();
+      Period planningPeriod = mockPeriod();
 
-      Period planningPeriod = getPeriod();
-
-      model.addAttribute("period", planningPeriod);
-      model.addAttribute("months", monthNames(planningPeriod));
+      model.addAttribute("planningPageViewModel",
+              planningService.createPlanningPageViewModel(currentUser, planningPeriod));
       return "planningPage";
    }
 
-   private List<String> monthNames(Period period) {
-      Period.MonthName beginMonthName = getPeriod().getBegingMounth();
-      Period.MonthName[] monthNames = Period.MonthName.values();
-      int indexesDone = 0;
 
-      List <String> months = new ArrayList<>(12);
-
-      for(int i = beginMonthName.getIndex(); i< monthNames.length; i++) {
-         months.add(monthNames[i].name());
-         indexesDone++;
-      }
-
-      int indexesLeft = monthNames.length - indexesDone;
-      for (int i = 0; i< indexesLeft; i++) {
-         months.add(monthNames[i].name());
-      }
-
-      return months;
-   }
-
-   private Period getPeriod(){
+   private Period mockPeriod(){
       Period p = new Period();
       p.setYearPlanned(2019);
       p.setPlanningEnabled(true);

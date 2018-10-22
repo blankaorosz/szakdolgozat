@@ -5,7 +5,7 @@
  */
 package hu.elte.szakdolgozat.spms.repository;
 
-import hu.elte.szakdolgozat.spms.model.Period;
+import hu.elte.szakdolgozat.spms.model.entity.Period;
 import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

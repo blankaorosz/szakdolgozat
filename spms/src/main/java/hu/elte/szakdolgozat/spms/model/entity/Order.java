@@ -3,36 +3,35 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package hu.elte.szakdolgozat.spms.model;
+package hu.elte.szakdolgozat.spms.model.entity;
 
+import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
  * @author Blanka Orosz
  */
 @Entity
-@Table(name = "COMPANY")
+@Table(name = "ORDER_TABLE")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class Company extends BaseEntity{    
-    @Column(nullable = false)
-    private String name;
-    
-    @Column(nullable = false)
-    private boolean active;
+public class Order extends BaseEntity{    
+    @DateTimeFormat(pattern = "MM-dd-yyyy")
+    private Date orderDate;
     
     @JoinColumn
-    @ManyToOne(targetEntity = User.class)
-    private User user;
+    @ManyToOne(targetEntity = Company.class)
+    private Company company;
 
-    @OneToMany(targetEntity = Order.class, mappedBy = "company")
-    private List<Order> orders;
+    @OneToMany(targetEntity = OrderItem.class, mappedBy = "order")
+    private List<OrderItem> orderItemList;
 }

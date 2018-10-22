@@ -5,8 +5,8 @@
  */
 package hu.elte.szakdolgozat.spms.repository;
 
-import hu.elte.szakdolgozat.spms.model.Role;
-import hu.elte.szakdolgozat.spms.model.Role.RoleName;
+import hu.elte.szakdolgozat.spms.model.entity.Role;
+import hu.elte.szakdolgozat.spms.model.entity.Role.RoleName;
 import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

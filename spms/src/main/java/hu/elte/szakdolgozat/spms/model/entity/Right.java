@@ -3,18 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package hu.elte.szakdolgozat.spms.model;
+package hu.elte.szakdolgozat.spms.model.entity;
 
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,24 +22,23 @@ import lombok.NoArgsConstructor;
  * @author Blanka Orosz
  */
 @Entity
-@Table(name = "ROLE")
+@Table(name = "RIGHT")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class Role extends BaseEntity{
+public class Right extends BaseEntity{
     @Column
     @Enumerated(EnumType.STRING)
-    private RoleName name;
+    private RightName name;
 
-    public enum RoleName {
-        SALES, CONTROLLER, CEO, ADMIN
+    public enum RightName {
+        WRITE_PLAN, READ_PLAN, ACCEPT_PLAN, SEND_PLAN,
+        WRITE_COMMENT, READ_COMMENT,
+        READ_USER, WRITE_USER,
+        WRITE_PLANNING_PERIOD
     }
     
-    @OneToMany(targetEntity = User.class, mappedBy = "role")
-    private List<User> user;
-    
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable
-    private List<Right> rights;
+    @ManyToMany(mappedBy = "rights")
+    private List<Role> roles;
 }
