@@ -96,9 +96,9 @@ public class AuthenticationDbInitializer {
      
      private void mockUser() {
          User user1 = new User();
-         user1.setName("Kovács Ede");
+         user1.setUserName("Kovács Ede");
          user1.setAgentCode("E1");
-         user1.setPassword(encoder.encode("asd")); // TODO: hash
+         user1.setPassword(encoder.encode("asd"));
          user1.setRole(roleRepository.findByName(Role.RoleName.SALES).get());
          
          userRepository.save(user1);    

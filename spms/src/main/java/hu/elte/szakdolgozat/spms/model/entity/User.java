@@ -33,7 +33,7 @@ public class User extends BaseEntity{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     @Column(nullable = false)
-    private String name;
+    private String userName;
     
     @Column
     private String agentCode;

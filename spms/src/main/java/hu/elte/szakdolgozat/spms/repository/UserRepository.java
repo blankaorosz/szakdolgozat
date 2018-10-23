@@ -17,9 +17,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
     
-    Optional<User> findByName(String name);
+    Optional<User> findByUserName(String userName);
     
     Optional<User> findByAgentCode(String agentCode);
 
-    Optional<User> findByNameAndPassword(String name, String password);
+    Optional<User> findByUserNameAndPassword(String userName, String password);
 }

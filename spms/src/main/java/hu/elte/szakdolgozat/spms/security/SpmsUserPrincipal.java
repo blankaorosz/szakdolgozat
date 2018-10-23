@@ -27,7 +27,11 @@ public class SpmsUserPrincipal implements UserDetails{
         this.user = user;
         
         if (user.getRole() != null && !CollectionUtils.isEmpty(user.getRole().getRights())) {
-            userAuthorities = new ArrayList<>(user.getRole().getRights().size());
+            userAuthorities = new ArrayList<>(user.getRole().getRights().size() + 1);
+
+            userAuthorities.add(new SimpleGrantedAuthority("ROLE_" +
+                    user.getRole().getName().name()));
+
             user.getRole().getRights().forEach((right) -> {
                 userAuthorities.add(new SimpleGrantedAuthority(right.getName().name()));
             });
@@ -46,7 +50,7 @@ public class SpmsUserPrincipal implements UserDetails{
 
     @Override
     public String getUsername() {
-        return user.getName();
+        return user.getUserName();
     }
 
     @Override
