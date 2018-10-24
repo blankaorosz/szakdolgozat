@@ -7,22 +7,29 @@
     <link rel="stylesheet" type="text/css" href="/css/jquery.dataTables.css">
     <link rel="stylesheet" type="text/css" href="/css/main.css">
     <link rel="stylesheet" type="text/css" href="/css/planningPage.css">
+    <link href="css/mb.balloon.css" rel="stylesheet">
 
     <script type="text/javascript" charset="utf8" src="/libs/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" charset="utf8" src="/libs/jquery.dataTables.js"></script>
     <script type="text/javascript" charset="utf8" src="/libs/dataTables.fixedColumns.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="/libs/jquery.mb.balloon.js"></script>
+
 
     <script>
+        jQuery.balloon.init();
+
         $(document).ready(function () {
             $('#planning-table').DataTable(
                 {
-                    scrollX:        true,
-                    fixedColumns:   {
+                    scrollX: true,
+                    fixedColumns: {
                         leftColumns: 1
                     },
                     columnDefs: [
-                        { orderable: false, targets: [1,2,3,4,5,6,7,8,9,10,
-                            11,12,13,14,15,16,17,18,19,20,21,22,23,24] }
+                        {
+                            orderable: false, targets: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+                                11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+                        }
                     ]
                 }
             );
@@ -47,10 +54,22 @@
             </tr>
         </thead>
         <tbody>
-            <tr th:each="row : ${planningPageViewModel.planningTableRow}">
-                <td th:each="cell,iter : ${row}" th:classappend="${iter.first} ? headCol">
-                    <input type="text" th:if="${cell.editable}" th:attr="value=${cell.content}" />
-                    <span th:unless="${cell.editable}" th:text="${cell.content}"></span>
+            <tr th:each="row,rowIterStat : ${planningPageViewModel.planningTableRow}">
+                <td th:each="cell,cellIterStat : ${row}" th:classappend="${cellIterStat.first} ? headCol">
+                    <input type="text" th:if="${cell.editable}" th:attr="value=${cell.content}"/>
+                    <div class="opener" th:unless="${cell.editable}"
+                         data-addclose="true"
+                         data-bgcolor="#ce161c"
+                         th:attr="onclick='$(this).showBalloon(event,{balloon:$(\'#prev-year-details-balloon'
+                            + ${rowIterStat.index} + ${cellIterStat.index} + '\')})'"
+                         th:inline="text">
+                        [[${cell.content}]]
+                        <span th:if="${not #lists.isEmpty(cell.details)}"
+                              th:attr="id='prev-year-details-balloon' + ${rowIterStat.index} + ${cellIterStat.index}"
+                              class="contentForBalloon">
+                            <p th:each="detail : ${cell.details}" th:text="${detail}"/>
+                        </span>
+                    </div>
                 </td>
             </tr>
         </tbody>

@@ -66,7 +66,7 @@ public class PlanningService {
                 if(j % 2 == 0) {
                     cell.setContent("20 000 ft");
                     List<String> detailList = new ArrayList<>();
-                    detailList.add("alma");
+                    detailList.add("alma" + i + "" + j);
                     detailList.add("harom sarga gurulos fotel almatartoval");
                     cell.setDetails(detailList);
                     cell.setEditable(false);

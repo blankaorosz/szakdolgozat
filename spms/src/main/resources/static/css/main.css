@@ -4,11 +4,23 @@ body{
 
 #page-header{
     height: 150px;
-    background-color: #d80d0d;
+    background-color: #ce161c;
 }
 
 #header-img {
     height: 100px;
     padding-left: 30px;
     padding-top: 25px;
+}
+
+.contentForBalloon{
+    display: none;
+    padding: 20px;
+}
+
+.opener {
+    cursor: pointer;
+    position:relative;
+    margin: auto;
+    clear: both
 }

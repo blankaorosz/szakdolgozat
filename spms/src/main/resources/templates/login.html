@@ -1,20 +1,29 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-    <head>
-        <title>SPMS login page</title>
-    </head>
-    <body>
-        <div th:if="${param.error}">
-            Invalid username and password.
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/login.css">
+
+</head>
+<body>
+    <header th:insert="pageHeader.html :: header"></header>
+
+    <form class="login-form" th:action="@{/login}" method="post">
+        <h1 class="login-page-title">Login</h1>
+        <input class="login-input" type="text" name="username" placeholder="Username" autofocusautofocus/>
+        <input class="login-input" type="password" name="password" placeholder="Password"/>
+        <input type="submit" class="login-button" value="Sign In"/>
+    </form>
+
+        <div class="msg" th:if="${param.error}">
+            Invalid username or password.
         </div>
-        <div th:if="${param.logout}">
+        <div class="msg" th:if="${param.logout}">
             You have been logged out.
         </div>
-        <form th:action="@{/login}" method="post">
-            <div><label> User Name : <input type="text" name="username"/> </label></div>
-            <div><label> Password: <input type="password" name="password"/> </label></div>
-            <div><input type="submit" value="Sign In"/></div>
-        </form>
-    </body>
+
+</body>
 </html>
