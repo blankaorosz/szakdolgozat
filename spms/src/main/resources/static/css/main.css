@@ -24,3 +24,22 @@ body{
     margin: auto;
     clear: both
 }
+
+.spms-button {
+    height: 45px;
+    font-size: 15px;
+    font-family: Rockwell;
+    color: #fff;
+    text-align: center;
+    background: #ce161c;
+    cursor: pointer;
+    float: right;
+    border-radius: 5px;
+    outline:0;
+    border: 0;
+    margin: 2px;
+}
+
+.DTFC_RightWrapper {
+    display: none;
+}

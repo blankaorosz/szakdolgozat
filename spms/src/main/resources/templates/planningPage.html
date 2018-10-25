@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
       xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
@@ -13,6 +13,7 @@
     <script type="text/javascript" charset="utf8" src="/libs/jquery.dataTables.js"></script>
     <script type="text/javascript" charset="utf8" src="/libs/dataTables.fixedColumns.min.js"></script>
     <script type="text/javascript" charset="utf8" src="/libs/jquery.mb.balloon.js"></script>
+    <script type="text/javascript" charset="utf8" src="/libs/planningTableButtonAction.js"></script>
 
 
     <script>
@@ -22,6 +23,7 @@
             $('#planning-table').DataTable(
                 {
                     scrollX: true,
+                    scrollY: false,
                     fixedColumns: {
                         leftColumns: 1
                     },
@@ -56,7 +58,11 @@
         <tbody>
             <tr th:each="row,rowIterStat : ${planningPageViewModel.planningTableRow}">
                 <td th:each="cell,cellIterStat : ${row}" th:classappend="${cellIterStat.first} ? headCol">
-                    <input type="text" th:if="${cell.editable}" th:attr="value=${cell.content}"/>
+                    <input class="planning-table-input-cell" type="text" th:if="${cell.editable}" th:attr="value=${cell.content},
+                         data-planid=${cell.planId},
+                         data-companyid=${cell.companyId},
+                         data-planpercompanyid=${cell.planPerCompanyId},
+                         data-month=${cell.month.name()}"/>
                     <div class="opener" th:unless="${cell.editable}"
                          data-addclose="true"
                          data-bgcolor="#ce161c"
@@ -79,6 +85,16 @@
                 <th th:each="year : ${planningPageViewModel.headerYears}" th:text="${year}"></th>
             </tr>
         </tfoot>
+
     </table>
+
+    <div class="planning-table-buttons-div">
+        <button class="spms-button" sec:authorize="hasRole('ROLE_CONTROLLER')"> Accept </button>
+        <button class="spms-button" sec:authorize="hasRole('ROLE_CONTROLLER')"> Send back to sales </button>
+        <button class="spms-button" sec:authorize="hasRole('ROLE_SALES')"> Send to controlling </button>
+        <button class="spms-button" onclick="savePlan()"> Save </button>
+    </div>
+
+
 </body>
 </html>

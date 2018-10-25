@@ -4,6 +4,7 @@ import hu.elte.szakdolgozat.spms.model.entity.Period;
 import hu.elte.szakdolgozat.spms.model.entity.User;
 import hu.elte.szakdolgozat.spms.model.ui.PlanningPageViewModel;
 import hu.elte.szakdolgozat.spms.model.ui.PlanningTableCellModel;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -76,7 +77,7 @@ public class PlanningService {
                     cell.setCompanyId(1l);
                     cell.setMonth(Period.MonthName.OCT);
                     cell.setPlanId(1l);
-                    cell.setPlanPerCompanyId(1l);
+//                    cell.setPlanPerCompanyId(1l);
                 }
                 planningTableCellModel.add(cell);
             }

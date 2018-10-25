@@ -12,3 +12,8 @@ div.dataTables_wrapper {
 .non-transparent-white{
     background-color: white;
 }
+.planning-table-buttons-div {
+    padding: 40px;
+    float: right;
+    margin-right: 2%;
+}

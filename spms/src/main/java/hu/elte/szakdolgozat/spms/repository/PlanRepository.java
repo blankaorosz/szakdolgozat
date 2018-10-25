@@ -19,7 +19,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface PlanRepository extends CrudRepository<Plan, Long> {
-
     Optional<Plan> findByStatus(PlanStatus status);
 
     Optional<Plan> findByPeriod(Period period);
