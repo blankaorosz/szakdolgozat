@@ -1,6 +1,6 @@
 package hu.elte.szakdolgozat.spms.util;
 
-import hu.elte.szakdolgozat.spms.model.entity.User;
+import hu.elte.szakdolgozat.spms.model.entity.spms.User;
 import hu.elte.szakdolgozat.spms.security.SpmsUserPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 

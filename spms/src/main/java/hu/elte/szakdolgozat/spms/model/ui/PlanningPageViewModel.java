@@ -1,6 +1,5 @@
 package hu.elte.szakdolgozat.spms.model.ui;
 
-import hu.elte.szakdolgozat.spms.model.entity.PlanPerCompany;
 import lombok.Data;
 
 import java.util.List;

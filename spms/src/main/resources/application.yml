@@ -1,14 +1,29 @@
 ---
 spring: 
     profiles: dev
-    datasource:
-        url=jdbc:h2:mem:testdb
-        driverClassName=org.h2.Driver
-        username=sa
-        password=
-    jpa:
-        database-platform=org.hibernate.dialect.H2Dialect
     h2:
         console:
             path: /h2
-        
+
+spms:
+    datasource:
+        url: jdbc:h2:mem:testdb
+        driverClassName: org.h2.Driver
+        username: sa
+        password:
+    jpa:
+        hibernate:
+            ddl-auto: create
+
+office:
+    datasource:
+        url: jdbc:h2:mem:testdbforoffice
+        driverClassName: org.h2.Driver
+        username: sa
+        password:
+    jpa:
+        hibernate:
+            ddl-auto: create
+
+# azert kellett a ket db config class hogy ezeket itt kulon lehssen configolni es amig test addig create de majd ha eles lesz akkor az office none
+#

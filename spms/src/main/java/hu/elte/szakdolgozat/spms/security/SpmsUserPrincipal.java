@@ -5,7 +5,7 @@
  */
 package hu.elte.szakdolgozat.spms.security;
 
-import hu.elte.szakdolgozat.spms.model.entity.User;
+import hu.elte.szakdolgozat.spms.model.entity.spms.User;
 import java.util.ArrayList;
 import java.util.Collection;
 

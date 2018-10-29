@@ -1,6 +1,6 @@
 package hu.elte.szakdolgozat.spms.model.ui;
 
-import hu.elte.szakdolgozat.spms.model.entity.Period;
+import hu.elte.szakdolgozat.spms.model.entity.spms.Period;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

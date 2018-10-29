@@ -1,10 +1,9 @@
 package hu.elte.szakdolgozat.spms.service;
 
-import hu.elte.szakdolgozat.spms.model.entity.Period;
-import hu.elte.szakdolgozat.spms.model.entity.User;
+import hu.elte.szakdolgozat.spms.model.entity.spms.Period;
+import hu.elte.szakdolgozat.spms.model.entity.spms.User;
 import hu.elte.szakdolgozat.spms.model.ui.PlanningPageViewModel;
 import hu.elte.szakdolgozat.spms.model.ui.PlanningTableCellModel;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

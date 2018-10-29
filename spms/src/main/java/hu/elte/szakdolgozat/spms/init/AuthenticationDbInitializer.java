@@ -5,12 +5,12 @@
  */
 package hu.elte.szakdolgozat.spms.init;
 
-import hu.elte.szakdolgozat.spms.model.entity.Right;
-import hu.elte.szakdolgozat.spms.model.entity.Role;
-import hu.elte.szakdolgozat.spms.model.entity.User;
-import hu.elte.szakdolgozat.spms.repository.RightRepository;
-import hu.elte.szakdolgozat.spms.repository.RoleRepository;
-import hu.elte.szakdolgozat.spms.repository.UserRepository;
+import hu.elte.szakdolgozat.spms.model.entity.spms.Right;
+import hu.elte.szakdolgozat.spms.model.entity.spms.Role;
+import hu.elte.szakdolgozat.spms.model.entity.spms.User;
+import hu.elte.szakdolgozat.spms.repository.spms.RightRepository;
+import hu.elte.szakdolgozat.spms.repository.spms.RoleRepository;
+import hu.elte.szakdolgozat.spms.repository.spms.UserRepository;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
