@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Administration</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="/css/tablesStyle.css">
+    <link rel="stylesheet" type="text/css" href="/css/adminPage.css">
+
+    <script type="text/javascript" charset="utf8" src="/libs/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="/libs/jquery.dataTables.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#admin-user-listing-table').DataTable(
+                {
+                    columnDefs: [
+                        {
+                            orderable: false, targets: [3]
+                        }
+                    ]
+                }
+            );
+        } );
+    </script>
+
+</head>
+<body>
+    <header th:insert="pageHeader.html :: header"></header>
+
+    <div align="center">
+        <H1><span th:text="ADMINISTRATION"></span></H1>
+    </div>
+
+    <hr class="title-underline-hr">
+
+    <div align="center">
+        <H2>MANAGE USERS</H2>
+    </div>
+
+   <table id="admin-user-listing-table"  class="stripe row-border order-column" style="width:100%">
+       <thead>
+           <tr>
+               <th >name</th>
+               <th >agent code</th>
+               <th >type</th>
+               <th>delete</th>
+           </tr>
+       </thead>
+       <tbody>
+           <tr>
+               <td>Juli</td>
+               <td>1334</td>
+               <td>Sales</td>
+               <td>DELETE</td>
+           </tr>
+           <tr>
+               <td>Juli</td>
+               <td>1374</td>
+               <td>Sales</td>
+               <td>DELETE</td>
+           </tr>
+           <tr>
+               <td>Juli</td>
+               <td>1334</td>
+               <td>Sales</td>
+               <td>DELETE</td>
+           </tr>
+           <tr>
+               <td>Juli</td>
+               <td>1534</td>
+               <td>Sales</td>
+               <td>DELETE</td>
+           </tr>
+       </tbody>
+   </table>
+
+    <hr class="admin-page-underline-hr">
+
+    <div align="center">
+        <H2>CREATE USER</H2>
+    </div>
+
+    <div class="user-adding-form">
+        <div>
+            <div class="add-user-text" style="font-weight:bold">Name</div>
+            <input class="add-user-field" type="text" name="user" placeholder="user" th:required="required"/>
+        </div>
+        <div>
+            <div class="add-user-text" style="font-weight:bold">User type</div>
+            <select class="add-user-field">
+                <option value="SALES">Sales</option>
+                <option value="CONTROLLER">Controller</option>
+                <option value="CEO">Ceo</option>
+            </select>
+        </div>
+        <div>
+            <div class="add-user-text" style="font-weight:bold">Agent Code</div>
+            <input class="add-user-field" type="text" name="agentcode" placeholder="agentcode" th:required="required"/>
+        </div>
+        <div>
+            <div class="add-user-text" style="font-weight:bold">Password</div>
+            <input class="add-user-field" type="password" name="password" placeholder="password" th:required="required"/>
+        </div>
+        <input class="add-user-button" type="submit" value="ADD" />
+    </div>
+
+</body>
+</html>

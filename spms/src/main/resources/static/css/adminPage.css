@@ -1,0 +1,40 @@
+.user-adding-form {
+    margin: 20px auto;
+    width: 300px;
+    padding: 30px 25px;
+}
+
+.add-user-button {
+    height: 45px;
+    font-size: 15px;
+    font-family: Rockwell;
+    color: #fff;
+    text-align: center;
+    background: #ce161c;
+    cursor: pointer;
+    border-radius: 5px;
+    outline:0;
+    border: 0;
+    margin: 2px;
+    width: 300px;
+    margin-top: 10px;
+}
+
+.add-user-field {
+    width: 300px;
+    height: 45px;
+    font-family: Rockwell;
+    font-size: 15px;
+}
+
+.add-user-text {
+    font-family: Rockwell;
+    font-size: 15px;
+    padding-top: 10px;
+}
+
+.admin-page-underline-hr {
+    width: 90%;
+    margin-top: 35px;
+    margin-bottom: 35px;
+}

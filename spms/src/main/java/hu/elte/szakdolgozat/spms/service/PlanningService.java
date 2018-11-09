@@ -14,6 +14,7 @@ public class PlanningService {
 
     public PlanningPageViewModel createPlanningPageViewModel(User user, Period period) {
         PlanningPageViewModel planningPageViewModel = new PlanningPageViewModel();
+        planningPageViewModel.setPlanId(1L);
         planningPageViewModel.setHeaderMonths(generateMonthHeader(period));
         planningPageViewModel.setHeaderYears(generateYearHeader(period));
         planningPageViewModel.setTitle("Planning process - " + period.getYearPlanned());

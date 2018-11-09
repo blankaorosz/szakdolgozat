@@ -21,3 +21,12 @@ function savePlan() {
         contentType: "application/json",
     });
 }
+
+function setPlanStatus(planId, status) {
+    $.ajax({
+        type: "POST",
+        url: "/rest/plan/" + planId + "/status/" + status,
+        contentType: "application/json",
+    });
+}
+

@@ -1,19 +1,27 @@
+.comment-section {
+    width: 50%;
+    margin-left: 5.25%;
+
+}
+
 #planning-table_wrapper{
     width: 90%;
     margin: auto;
 }
 
-th, td { white-space: nowrap; }
-div.dataTables_wrapper {
-    width: 800px;
-    margin: 0 auto;
+.choose-sales-field {
+    width: 300px;
+    height: 45px;
+    font-family: Rockwell;
+    font-size: 15px;
 }
 
-.non-transparent-white{
-    background-color: white;
+.choose-sales-text {
+    font-family: Rockwell;
+    font-size: 15px;
+    padding-top: 10px;
 }
-.planning-table-buttons-div {
-    padding: 40px;
-    float: right;
-    margin-right: 2%;
+
+.choose-sales-div {
+    margin-bottom: 30px;
 }

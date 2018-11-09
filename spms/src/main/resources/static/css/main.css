@@ -43,3 +43,23 @@ body{
 .DTFC_RightWrapper {
     display: none;
 }
+
+div.dataTables_wrapper {
+    width: 800px;
+    margin: 0 auto;
+}
+
+.non-transparent-white{
+    background-color: white;
+}
+
+.title-underline-hr {
+    width: 70%;
+    margin-bottom: 35px;
+}
+
+.logout {
+    font-family: Rockwell;
+    color: white;
+    horiz-align: right;
+}

@@ -16,7 +16,7 @@ public class PlanningController {
    @Autowired
    private PlanningService planningService;
 
-   @PreAuthorize("hasRole('ROLE_SALES')")
+   @PreAuthorize("hasAnyRole('ROLE_SALES', 'ROLE_CONTROLLER')")
    @RequestMapping(method = RequestMethod.GET)
    public String getPlanningPage(ModelMap model) {
       User currentUser = SecurityUtil.getLoggedInUser();

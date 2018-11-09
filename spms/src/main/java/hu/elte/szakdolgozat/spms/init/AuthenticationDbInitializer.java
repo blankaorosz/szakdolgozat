@@ -101,8 +101,14 @@ public class AuthenticationDbInitializer {
          user1.setPassword(encoder.encode("asd"));
          user1.setRole(roleRepository.findByName(Role.RoleName.SALES).get());
          
-         userRepository.save(user1);    
-         
+         userRepository.save(user1);
+
+         User user2 = new User();
+         user2.setUserName("ControllerAranka");
+         user2.setPassword(encoder.encode("asd"));
+         user2.setRole(roleRepository.findByName(Role.RoleName.CONTROLLER).get());
+
+         userRepository.save(user2);
          
      }
 }

@@ -1,0 +1,18 @@
+#admin-user-listing-table_wrapper{
+    width: 90%;
+    margin: auto;
+}
+
+#monitoring-table_wrapper{
+    width: 90%;
+    margin: auto;
+}
+
+th, td { white-space: nowrap; }
+
+.planning-table-buttons-div {
+    padding: 40px;
+    float: right;
+    margin-right: 2%;
+}
+
