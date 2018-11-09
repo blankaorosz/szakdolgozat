@@ -9,6 +9,7 @@ import hu.elte.szakdolgozat.spms.model.entity.spms.Order;
 import hu.elte.szakdolgozat.spms.model.entity.spms.OrderItem;
 import hu.elte.szakdolgozat.spms.model.entity.spms.Product;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -19,12 +20,14 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface OrderItemRepository extends CrudRepository<OrderItem, Long> {
-    
-    Optional<OrderItem> findByQuantity(int quantity);
 
-    Optional<OrderItem> findByProductPriceAtOrderTime(BigDecimal productPriceAtOrderTime);
+    List<OrderItem> findByQuantity(int quantity);
 
-    Optional<OrderItem> findByOrder(Order order);
+    List<OrderItem> findByProductPriceAtOrderTime(BigDecimal productPriceAtOrderTime);
 
-    Optional<OrderItem> findByProduct(Product product);
+    List<OrderItem> findByOrder(Order order);
+
+    List<OrderItem> findByProduct(Product product);
+
+    Optional<OrderItem> findByOfficeOrderItemCode(String officeOrderItemCode);
 }

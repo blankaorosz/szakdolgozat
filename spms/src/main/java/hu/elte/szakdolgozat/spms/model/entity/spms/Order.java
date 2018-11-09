@@ -32,6 +32,7 @@ public class Order extends BaseEntity{
     @ManyToOne(targetEntity = Company.class)
     private Company company;
 
-    @OneToMany(targetEntity = OrderItem.class, mappedBy = "order")
+    @OneToMany(targetEntity = OrderItem.class, mappedBy = "order",
+            cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<OrderItem> orderItemList;
 }

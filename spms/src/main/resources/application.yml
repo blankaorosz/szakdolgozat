@@ -4,7 +4,8 @@ spring:
     h2:
         console:
             path: /h2
-
+    jpa:
+        show-sql: false
 spms:
     datasource:
         url: jdbc:h2:mem:testdb
@@ -23,7 +24,7 @@ office:
         password:
     jpa:
         hibernate:
-            ddl-auto: create
+            ddl-auto: none
 
 # azert kellett a ket db config class hogy ezeket itt kulon lehssen configolni es amig test addig create de majd ha eles lesz akkor az office none
 #

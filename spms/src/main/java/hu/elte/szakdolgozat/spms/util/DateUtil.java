@@ -2,15 +2,29 @@ package hu.elte.szakdolgozat.spms.util;
 
 import org.springframework.util.StringUtils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 public class DateUtil {
 
-    public static Date JDEDateToUnixDate(String jdeDate) {
-        if (StringUtils.isEmpty(jdeDate) || jdeDate.length() < 5 || jdeDate.length() > 6) {
-            throw new IllegalArgumentException("Not a valid JDE date: " + jdeDate);
+    private static final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+
+    public static Date parseDate(String pattern) {
+        try {
+            return df.parse(pattern);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
         }
+    }
+
+    public static Date JDEDateToUnixDate(Integer jdeDateInteger) {
+        if (jdeDateInteger == null || jdeDateInteger < 10000 || jdeDateInteger > 999999) {
+            throw new IllegalArgumentException("Not a valid JDE date: " + jdeDateInteger);
+        }
+
+        String jdeDate = String.valueOf(jdeDateInteger);
 
         if (jdeDate.length() == 5) {
             jdeDate = "0" + jdeDate;
@@ -39,13 +53,13 @@ public class DateUtil {
         return c;
     }
 
-    public static String dateToJDEDate(Date da) {
+    public static Integer dateToJDEDate(Date da) {
         Calendar c = Calendar.getInstance();
         c.setTime(da);
         String dayofyear = "" + c.get(Calendar.DAY_OF_YEAR);
-        if(dayofyear.length() == 1) dayofyear= 00 + dayofyear;
-        if(dayofyear.length() == 2) dayofyear= 0 + dayofyear;
+        if(dayofyear.length() == 1) dayofyear = "00" + dayofyear;
+        if(dayofyear.length() == 2) dayofyear = "0" + dayofyear;
         String jdeDate = "" +(c.get(Calendar.YEAR)-1900) + dayofyear;
-        return jdeDate;
+        return Integer.valueOf(jdeDate);
     }
 }

@@ -41,6 +41,7 @@ public class OfficeDbConfig {
         return new EmbeddedDatabaseBuilder()
                 .setType(EmbeddedDatabaseType.H2)
                 .setName(dbName)
+                .addScript("/db-scripts/initOfficeDBMock.sql")
                 .build();
     }
 

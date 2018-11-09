@@ -25,10 +25,10 @@ public class SpmsUserDetailService implements UserDetailsService{
     
     @Override
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
-        Optional<User> result = userRepository.findByUserName(name);
+        User result = userRepository.findByUserName(name);
         
-        if (result.isPresent()) {
-            return new SpmsUserPrincipal(result.get());
+        if (result != null) {
+            return new SpmsUserPrincipal(result);
         }
         
         return null;

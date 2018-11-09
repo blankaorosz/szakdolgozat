@@ -26,7 +26,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class OrderItem extends BaseEntity{         
+public class OrderItem extends BaseEntity{
+    @Column(nullable = false)
+    private String officeOrderItemCode;
+
     @Column(nullable = false)
     private int quantity;
     

@@ -7,7 +7,6 @@ package hu.elte.szakdolgozat.spms.repository.spms;
 
 import hu.elte.szakdolgozat.spms.model.entity.spms.Role;
 import hu.elte.szakdolgozat.spms.model.entity.spms.Role.RoleName;
-import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -18,5 +17,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RoleRepository extends CrudRepository<Role, Long> {
  
-    Optional<Role> findByName(RoleName name);
+    Role findByName(RoleName name);
 }

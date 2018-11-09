@@ -6,10 +6,11 @@
 package hu.elte.szakdolgozat.spms.repository.spms;
 
 import hu.elte.szakdolgozat.spms.model.entity.spms.Product;
-import java.math.BigDecimal;
-import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+
+import java.math.BigDecimal;
+import java.util.List;
 
 /**
  *
@@ -18,9 +19,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProductRepository extends CrudRepository<Product, Long> {
     
-    Optional<Product> findByName(String name);
+    Product findByName(String name);
 
-    Optional<Product> findByPrice(BigDecimal price);
+    List<Product> findByPrice(BigDecimal price);
 
-    Optional<Product> findByUnit(String unit);
+    List<Product> findByUnit(String unit);
 }

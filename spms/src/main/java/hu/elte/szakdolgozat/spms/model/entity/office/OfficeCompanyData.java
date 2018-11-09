@@ -27,6 +27,5 @@ public class OfficeCompanyData {
     private String companyName;
 
     @Column(name = "RPCUSTS")
-//    @Type(type = "true_false")
     private Boolean companyActive;
 }

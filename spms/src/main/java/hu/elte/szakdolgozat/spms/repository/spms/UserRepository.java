@@ -6,7 +6,6 @@
 package hu.elte.szakdolgozat.spms.repository.spms;
 
 import hu.elte.szakdolgozat.spms.model.entity.spms.User;
-import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -17,9 +16,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
     
-    Optional<User> findByUserName(String userName);
+    User findByUserName(String userName);
     
-    Optional<User> findByAgentCode(String agentCode);
+    User findByAgentCode(String agentCode);
 
-    Optional<User> findByUserNameAndPassword(String userName, String password);
 }

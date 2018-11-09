@@ -56,36 +56,36 @@ public class AuthenticationDbInitializer {
         }
     }
     
-     private void initRoleIfEmpty() throws IllegalArgumentException, IllegalAccessException {
+     private void initRoleIfEmpty() throws IllegalArgumentException {
         if( roleRepository.count() > 0 ){
             return;
         }
         Role salesRole = new Role();
         salesRole.setName(Role.RoleName.SALES);
         List<Right> salesRights = new ArrayList<>();
-        salesRights.add(rightRepository.findByName(Right.RightName.READ_COMMENT).get());
-        salesRights.add(rightRepository.findByName(Right.RightName.READ_PLAN).get());
-        salesRights.add(rightRepository.findByName(Right.RightName.WRITE_PLAN).get());
-        salesRights.add(rightRepository.findByName(Right.RightName.SEND_PLAN).get());
+        salesRights.add(rightRepository.findByName(Right.RightName.READ_COMMENT));
+        salesRights.add(rightRepository.findByName(Right.RightName.READ_PLAN));
+        salesRights.add(rightRepository.findByName(Right.RightName.WRITE_PLAN));
+        salesRights.add(rightRepository.findByName(Right.RightName.SEND_PLAN));
         salesRole.setRights(salesRights);
         
         Role controllerRole = new Role();
         controllerRole.setName(Role.RoleName.CONTROLLER);
         List<Right> controllerRights = new ArrayList<>();
-        controllerRights.add(rightRepository.findByName(Right.RightName.READ_COMMENT).get());
-        controllerRights.add(rightRepository.findByName(Right.RightName.WRITE_COMMENT).get());
-        controllerRights.add(rightRepository.findByName(Right.RightName.READ_PLAN).get());
-        controllerRights.add(rightRepository.findByName(Right.RightName.WRITE_PLAN).get());
-        controllerRights.add(rightRepository.findByName(Right.RightName.ACCEPT_PLAN).get());
-        controllerRights.add(rightRepository.findByName(Right.RightName.SEND_PLAN).get());
+        controllerRights.add(rightRepository.findByName(Right.RightName.READ_COMMENT));
+        controllerRights.add(rightRepository.findByName(Right.RightName.WRITE_COMMENT));
+        controllerRights.add(rightRepository.findByName(Right.RightName.READ_PLAN));
+        controllerRights.add(rightRepository.findByName(Right.RightName.WRITE_PLAN));
+        controllerRights.add(rightRepository.findByName(Right.RightName.ACCEPT_PLAN));
+        controllerRights.add(rightRepository.findByName(Right.RightName.SEND_PLAN));
         controllerRole.setRights(controllerRights);
         
         Role ceoRole = new Role();
         ceoRole.setName(Role.RoleName.CEO);
         List<Right> ceoRights = new ArrayList<>();
-        ceoRights.add(rightRepository.findByName(Right.RightName.READ_PLAN).get());
-        ceoRights.add(rightRepository.findByName(Right.RightName.READ_COMMENT).get());
-        ceoRights.add(rightRepository.findByName(Right.RightName.WRITE_PLANNING_PERIOD).get());
+        ceoRights.add(rightRepository.findByName(Right.RightName.READ_PLAN));
+        ceoRights.add(rightRepository.findByName(Right.RightName.READ_COMMENT));
+        ceoRights.add(rightRepository.findByName(Right.RightName.WRITE_PLANNING_PERIOD));
         ceoRole.setRights(ceoRights);
         
         roleRepository.save(salesRole);
@@ -99,14 +99,14 @@ public class AuthenticationDbInitializer {
          user1.setUserName("Kovács Ede");
          user1.setAgentCode("E1");
          user1.setPassword(encoder.encode("asd"));
-         user1.setRole(roleRepository.findByName(Role.RoleName.SALES).get());
+         user1.setRole(roleRepository.findByName(Role.RoleName.SALES));
          
          userRepository.save(user1);
 
          User user2 = new User();
          user2.setUserName("ControllerAranka");
          user2.setPassword(encoder.encode("asd"));
-         user2.setRole(roleRepository.findByName(Role.RoleName.CONTROLLER).get());
+         user2.setRole(roleRepository.findByName(Role.RoleName.CONTROLLER));
 
          userRepository.save(user2);
          

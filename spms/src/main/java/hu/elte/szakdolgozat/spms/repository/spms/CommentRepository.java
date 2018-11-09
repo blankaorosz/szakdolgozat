@@ -8,6 +8,8 @@ package hu.elte.szakdolgozat.spms.repository.spms;
 import hu.elte.szakdolgozat.spms.model.entity.spms.Comment;
 import hu.elte.szakdolgozat.spms.model.entity.spms.Plan;
 import org.springframework.data.repository.CrudRepository;
+
+import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Repository;
 
@@ -18,12 +20,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CommentRepository extends CrudRepository<Comment, Long> {
 
-    Optional<Comment> findByNameFrom(String nameFrom);
+    List<Comment> findByNameFrom(String nameFrom);
 
-    Optional<Comment> findByNameTo(String nameTo);
+    List<Comment> findByNameTo(String nameTo);
 
-    Optional<Comment> findByChecked(boolean checked);
+    List<Comment> findByChecked(boolean checked);
 
-    Optional<Comment> findByPlan(Plan plan);
+    List<Comment> findByPlan(Plan plan);
 
 }

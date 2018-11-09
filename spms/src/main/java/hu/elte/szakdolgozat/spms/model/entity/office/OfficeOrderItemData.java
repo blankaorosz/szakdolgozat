@@ -19,7 +19,7 @@ public class OfficeOrderItemData {
     private String orderItemIdentifier;
 
     @Column(name = "RPDOCO")
-    private String transactionNum;
+    private String transactionId;
 
     @Column(name = "RPDCTO")
     private String transactionType;
@@ -28,16 +28,13 @@ public class OfficeOrderItemData {
     private String companyIdentifier;
 
     @Column(name = "RPLITM", nullable = false)
-    private String itemIdentifier;
+    private String productIdentifier;
 
     @Column(name = "RPDSC1", nullable = false)
-    private String itemNameFirstPart;
-
-    @Column(name = "RPDSC2", nullable = false)
-    private String itemNameSecondPart;
+    private String productName;
 
     @Column(name = "RPTRDJ", nullable = false)
-    private String transactionDateJDEJulian;
+    private Integer transactionDateJDEJulian;
 
     @Column(name = "RPUOM1", nullable = false)
     private String productUnit;

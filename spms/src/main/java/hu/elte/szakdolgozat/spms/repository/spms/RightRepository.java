@@ -18,5 +18,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RightRepository extends CrudRepository<Right, Long> {
     
-    Optional<Right> findByName(RightName name);
+    Right findByName(RightName name);
 }

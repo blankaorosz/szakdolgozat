@@ -9,6 +9,8 @@ import hu.elte.szakdolgozat.spms.model.entity.spms.Period;
 import hu.elte.szakdolgozat.spms.model.entity.spms.User;
 import hu.elte.szakdolgozat.spms.model.entity.spms.Plan;
 import hu.elte.szakdolgozat.spms.model.entity.spms.Plan.PlanStatus;
+
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -19,9 +21,9 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface PlanRepository extends CrudRepository<Plan, Long> {
-    Optional<Plan> findByStatus(PlanStatus status);
+    List<Plan> findByStatus(PlanStatus status);
 
-    Optional<Plan> findByPeriod(Period period);
+    List<Plan> findByPeriod(Period period);
 
-    Optional<Plan> findByUser(User user);
+    List<Plan> findByUser(User user);
 }
