@@ -11,6 +11,7 @@
 
     <script type="text/javascript" charset="utf8" src="/libs/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" charset="utf8" src="/libs/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8" src="/libs/adminPage.js"></script>
 
     <script>
         $(document).ready(function() {
@@ -46,33 +47,24 @@
                <th >name</th>
                <th >agent code</th>
                <th >type</th>
-               <th>delete</th>
+               <th>edit</th>
            </tr>
        </thead>
-       <tbody>
-           <tr>
-               <td>Juli</td>
-               <td>1334</td>
-               <td>Sales</td>
-               <td>DELETE</td>
-           </tr>
-           <tr>
-               <td>Juli</td>
-               <td>1374</td>
-               <td>Sales</td>
-               <td>DELETE</td>
-           </tr>
-           <tr>
-               <td>Juli</td>
-               <td>1334</td>
-               <td>Sales</td>
-               <td>DELETE</td>
-           </tr>
-           <tr>
-               <td>Juli</td>
-               <td>1534</td>
-               <td>Sales</td>
-               <td>DELETE</td>
+       <tbody admin-user-listing-table-body>
+           <tr th:each="user : ${users}" th:id="'user-table-row-'+${user.id}"
+               th:classappend="${#strings.isEmpty(user.password)} ? highlight">
+
+               <td th:text="${user.userName}"></td>
+               <td th:text="${user.agentCode}"></td>
+               <td th:text="${user.role.name}"></td>
+               <td>
+                   <button th:if="${user.role.name != T(hu.elte.szakdolgozat.spms.model.entity.spms.Role.RoleName).SALES}"
+                           class="spms-button"
+                           th:onclick="'deleteUser(' + ${user.id} + ')'">
+                       delete
+                   </button>
+                   <button class="spms-button" onclick="editUser()"> edit </button>
+               </td>
            </tr>
        </tbody>
    </table>
@@ -86,25 +78,19 @@
     <div class="user-adding-form">
         <div>
             <div class="add-user-text" style="font-weight:bold">Name</div>
-            <input class="add-user-field" type="text" name="user" placeholder="user" th:required="required"/>
+            <input id="add-user-name" class="add-user-field" type="text" name="user" placeholder="user" th:required="required"/>
         </div>
         <div>
             <div class="add-user-text" style="font-weight:bold">User type</div>
-            <select class="add-user-field">
-                <option value="SALES">Sales</option>
-                <option value="CONTROLLER">Controller</option>
-                <option value="CEO">Ceo</option>
+            <select class="add-user-field" id="add-user-role-name">
+                <option th:each="roleName : ${roleNames}" th:value="${roleName}" th:text="${roleName}"></option>
             </select>
         </div>
         <div>
-            <div class="add-user-text" style="font-weight:bold">Agent Code</div>
-            <input class="add-user-field" type="text" name="agentcode" placeholder="agentcode" th:required="required"/>
-        </div>
-        <div>
             <div class="add-user-text" style="font-weight:bold">Password</div>
-            <input class="add-user-field" type="password" name="password" placeholder="password" th:required="required"/>
+            <input id="add-user-password" class="add-user-field" type="password" name="password" placeholder="password"/>
         </div>
-        <input class="add-user-button" type="submit" value="ADD" />
+        <input class="add-user-button" type="submit" value="ADD" onclick="createUser()"/>
     </div>
 
 </body>

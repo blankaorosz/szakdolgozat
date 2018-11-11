@@ -63,3 +63,7 @@ div.dataTables_wrapper {
     color: white;
     horiz-align: right;
 }
+
+.highlight {
+    background-color: salmon !important;
+}

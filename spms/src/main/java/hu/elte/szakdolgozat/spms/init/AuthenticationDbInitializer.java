@@ -87,10 +87,19 @@ public class AuthenticationDbInitializer {
         ceoRights.add(rightRepository.findByName(Right.RightName.READ_COMMENT));
         ceoRights.add(rightRepository.findByName(Right.RightName.WRITE_PLANNING_PERIOD));
         ceoRole.setRights(ceoRights);
-        
+
+        Role adminRole = new Role();
+        adminRole.setName(Role.RoleName.ADMIN);
+        List<Right> allRight = new ArrayList<>();
+        for (Right r : rightRepository.findAll()) {
+            allRight.add(r);
+        }
+        adminRole.setRights(allRight);
+
         roleRepository.save(salesRole);
         roleRepository.save(controllerRole);
         roleRepository.save(ceoRole);
+        roleRepository.save(adminRole);
         
     }
      
@@ -109,6 +118,12 @@ public class AuthenticationDbInitializer {
          user2.setRole(roleRepository.findByName(Role.RoleName.CONTROLLER));
 
          userRepository.save(user2);
-         
+
+         User adminUser = new User();
+         adminUser.setUserName("AdminAladar");
+         adminUser.setPassword(encoder.encode("asd"));
+         adminUser.setRole(roleRepository.findByName(Role.RoleName.ADMIN));
+
+         userRepository.save(adminUser);
      }
 }
