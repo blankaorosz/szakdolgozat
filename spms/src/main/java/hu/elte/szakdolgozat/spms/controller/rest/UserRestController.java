@@ -68,4 +68,43 @@ public class UserRestController {
         spmsRestResponse.setMessage("User can't be deleted");
         return spmsRestResponse;
     }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PostMapping("/save/{userId}")
+    public SpmsRestResponse saveUser(@PathVariable Long userId, @RequestBody CreateUserModel userModel) {
+        SpmsRestResponse response = new SpmsRestResponse();
+
+        try {
+            boolean updated = false;
+
+            User user = userRepository.findById(userId).get();
+            if (userModel.getUserName() != null && !userModel.getUserName().equals(user.getUserName())) {
+                user.setUserName(userModel.getUserName());
+                updated = true;
+            }
+
+            if (userModel.getUserPassword() != null) {
+                String hashedPassword = passwordEncoder.encode(userModel.getUserPassword());
+                if (!hashedPassword.equals(user.getPassword())) {
+                    user.setPassword(hashedPassword);
+                    updated = true;
+                }
+            }
+
+            if (updated) {
+                userRepository.save(user);
+            }
+
+            response.setSuccess(true);
+            response.setMessage("User has been updated!");
+        }catch (Exception ex) {
+            response.setSuccess(false);
+            String msg = String
+                    .format("Unexpected error while trying to update user with id: %s! Error: %s",
+                            userId, ex.getMessage());
+            response.setMessage(msg);
+        }
+
+        return response;
+    }
 }

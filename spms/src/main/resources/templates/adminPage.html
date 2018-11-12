@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
       xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
@@ -24,6 +25,10 @@
                     ]
                 }
             );
+
+            $("#close-user-modify-form-modal").click(function () {
+                $("#user-modify-form-modal").css("display", "none");
+            })
         } );
     </script>
 
@@ -63,7 +68,10 @@
                            th:onclick="'deleteUser(' + ${user.id} + ')'">
                        delete
                    </button>
-                   <button class="spms-button" onclick="editUser()"> edit </button>
+                   <button class="spms-button"
+                           th:onclick="'openEditUserDialog(' + ${user.id} + ',\'' + ${user.userName} + '\')'">
+                       edit
+                   </button>
                </td>
            </tr>
        </tbody>
@@ -93,5 +101,29 @@
         <input class="add-user-button" type="submit" value="ADD" onclick="createUser()"/>
     </div>
 
+    <!--modify user popup-->
+    <div id="user-modify-form-modal" class="user-modify-form-modal">
+        <div class="modal-content">
+            <span id="close-user-modify-form-modal" class="close">&times;</span>
+            <div class="modal-content-form">
+                <div>
+                    <div class="add-user-text" style="font-weight:bold">Name</div>
+                    <input id="modify-user-name" class="add-user-field" type="text" name="user" placeholder="user" th:required="required"/>
+                </div>
+                <div>
+                    <div class="add-user-text" style="font-weight:bold">Password</div>
+                    <input id="modify-user-password" class="add-user-field" type="password" name="password" placeholder="password"/>
+                </div>
+                <div>
+                    <div class="add-user-text" style="font-weight:bold">Confirm password</div>
+                    <input id="modify-user-password-confirm" class="add-user-field" type="password" name="password" placeholder="password"/>
+                </div>
+
+                <div id="pass-not-match-msg" class="pass-not-match-msg">Password does not match!</div>
+
+                <input class="add-user-button" type="submit" value="Save" onclick="saveUser()"/>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

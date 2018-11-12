@@ -76,3 +76,82 @@ function deleteUser(userId) {
         });
     }
 }
+
+function openEditUserDialog(userId, userName) {
+    var userNameInput = $("#modify-user-name");
+    var passwordInput = $("#modify-user-password");
+    var passwordInputConfirm = $("#modify-user-password-confirm");
+
+    userNameInput.val(userName);
+    passwordInput.val("");
+    passwordInputConfirm.val("");
+
+    userNameInput.data('user-id', userId);
+
+    $("#user-modify-form-modal").css("display", "block");
+}
+
+function saveUser() {
+    var userNameInput = $("#modify-user-name");
+    var passwordInput = $("#modify-user-password");
+    var passwordInputConfirm = $("#modify-user-password-confirm");
+
+    var userName = userNameInput.val();
+    var password = passwordInput.val();
+    var passwordConf = passwordInputConfirm.val();
+    var userId = userNameInput.data('user-id');
+
+    var valid = true;
+
+    if(userName){
+        $('#modify-user-name').css('border-color', '');
+    }else {
+        $('#modify-user-name').css('border-color', 'red');
+        valid = false;
+    }
+
+    if(password){
+        $('#modify-user-password').css('border-color', '');
+    }else {
+        $('#modify-user-password').css('border-color', 'red');
+        valid = false;
+    }
+
+    if(passwordConf){
+        $('#modify-user-password-confirm').css('border-color', '');
+    }else {
+        $('#modify-user-password-confirm').css('border-color', 'red');
+        valid = false;
+    }
+
+    if (passwordConf !== password) {
+        $("#pass-not-match-msg").css("display", "block");
+        $('#modify-user-password').css('border-color', 'red');
+        $('#modify-user-password-confirm').css('border-color', 'red');
+        valid = false;
+    } else {
+        $("#pass-not-match-msg").css("display", "none");
+    }
+
+    if (valid) {
+        var jsonReq = {
+            userName : userName,
+            userPassword : password
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/rest/user/save/" + userId,
+            data: JSON.stringify(jsonReq),
+            contentType: "application/json"
+        }).done(function (data) {
+            if (data.success) {
+                $('#user-table-row-' + userId).removeClass("highlight");
+            }
+
+            $("#close-user-modify-form-modal").click();
+
+            alert(data.message);
+        });
+    }
+}
