@@ -1,0 +1,16 @@
+.date-refresher-form {
+    display: inline-flex;
+}
+
+.date-refresher-form p {
+    margin-right: 10px;
+}
+
+#from-date-picker {
+    margin-left: 30px;
+}
+
+.monitorting-period-starter {
+    margin-right: 30px;
+    padding-bottom: 55px;
+}

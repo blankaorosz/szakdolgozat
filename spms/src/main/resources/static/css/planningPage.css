@@ -25,3 +25,10 @@
 .choose-sales-div {
     margin-bottom: 30px;
 }
+
+.planning-table-input-cell:valid {
+    color: green;
+}
+.planning-table-input-cell:invalid {
+    color: red;
+}

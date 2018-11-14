@@ -10,7 +10,7 @@ import org.springframework.ui.ModelMap;
 @RequestMapping("/monitoringPage")
 public class MonitoringController {
 
-    @PreAuthorize("hasRole('ROLE_SALES')")
+    @PreAuthorize("hasAnyRole('ROLE_CEO', 'ROLE_SALES', 'ROLE_CONTROLLER')")
     @RequestMapping(method = RequestMethod.GET)
     public String getPlanningPage(ModelMap model) {
 

@@ -22,4 +22,7 @@ public interface PeriodRepository extends CrudRepository<Period, Long> {
     List<Period> findByYearPlanned(int yearPlanned);
 
     List<Period> findByPlanningEnabled(boolean planningEnabled);
+
+    Optional<Period> findByActive(boolean active);
 }
+

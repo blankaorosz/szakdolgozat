@@ -1,3 +1,7 @@
+#admin-user-listing-table_wrapper{
+    width: 90%;
+    margin: auto;
+}
 .user-adding-form {
     margin: 20px auto;
     width: 300px;

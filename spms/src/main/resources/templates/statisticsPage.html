@@ -5,18 +5,14 @@
     <meta charset="UTF-8">
     <title>Statistics </title>
     <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="/css/statisticsPage.css">
 
-<body>
-    <header th:insert="pageHeader.html :: header"></header>
 
-    <div align="center">
-        <H1>Planning statistics</H1>
-    </div>
-    <hr class="title-underline-hr">
-    <div id="piechart" align="center"></div>
-
+    <script type="text/javascript" charset="utf8" src="/libs/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
+    <script type="text/javascript" charset="utf8" src="/libs/jquery-ui.js"></script>
+    <script type="text/javascript" charset="utf8" src="/libs/statisticsPage.js"></script>
     <script type="text/javascript">
         // Load google charts
         google.charts.load('current', {'packages':['corechart']});
@@ -36,8 +32,8 @@
             // Optional; add a title and set the width and height of the chart
             var options = {
                 'title':'Sales plans status diagram',
-                'width':900,
-                'height':800,
+                'width':800,
+                'height':600,
                 'colors': ['#AAEF00', '#ce161c', '#ff990a', '#F9F600']};
 
             // Display the chart inside the <div> element with id="piechart"
@@ -45,6 +41,42 @@
             chart.draw(data, options);
         }
     </script>
+
+    <script>
+        $( function() {
+            $( "#datepicker-from" ).datepicker({
+                dateFormat: "yy-mm-dd"
+            });
+            $( "#datepicker-from" ).datepicker('setDate', -30);
+            $( "#datepicker-to" ).datepicker({
+                dateFormat: "yy-mm-dd"
+            });
+            $( "#datepicker-to" ).datepicker('setDate', 'today');
+        } );
+
+    </script>
+
+<body>
+    <header th:insert="pageHeader.html :: header"></header>
+
+    <div align="center">
+        <H1>Planning statistics</H1>
+    </div>
+    <hr class="title-underline-hr">
+
+    <div class="date-refresher-form">
+        <p id="from-date-picker">From: <input type="text" id="datepicker-from"></p>
+        <p>To: <input type="text" id="datepicker-to"></p>
+        <button class="spms-button" onclick="refreshOfficeData()"> Refresh </button>
+    </div>
+
+    <div align="right" class="monitorting-period-starter">
+        <button class="spms-button" onclick="startMonitoring()"> Start monitoring period </button>
+    </div>
+
+    <div id="piechart" align="center"></div>
+
+
 
 </body>
 </html>

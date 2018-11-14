@@ -22,5 +22,5 @@ public interface OrdersRepository extends CrudRepository<Order, Long> {
     
     List<Order> findByOrderDate(Date orderDate);
 
-    List<Order> findByCompany(Company company);
+    List<Order> findByCompanyAndOrderDateBetween(Company company, Date from, Date to);
 }

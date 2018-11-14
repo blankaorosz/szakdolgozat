@@ -1,5 +1,6 @@
 package hu.elte.szakdolgozat.spms.util;
 
+import hu.elte.szakdolgozat.spms.model.entity.spms.Period;
 import org.springframework.util.StringUtils;
 
 import java.text.ParseException;
@@ -10,6 +11,10 @@ import java.util.Date;
 public class DateUtil {
 
     private static final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+
+    public static int getCurrentYear() {
+        return Calendar.getInstance().get(Calendar.YEAR);
+    }
 
     public static Date parseDate(String pattern) {
         try {
@@ -61,5 +66,12 @@ public class DateUtil {
         if(dayofyear.length() == 2) dayofyear = "0" + dayofyear;
         String jdeDate = "" +(c.get(Calendar.YEAR)-1900) + dayofyear;
         return Integer.valueOf(jdeDate);
+    }
+
+    public static Date createDateFromYearAndMonth(int year, int month) {
+        Calendar c = createInstance();
+        c.set(Calendar.YEAR, year);
+        c.set(Calendar.MONTH, month);
+        return c.getTime();
     }
 }

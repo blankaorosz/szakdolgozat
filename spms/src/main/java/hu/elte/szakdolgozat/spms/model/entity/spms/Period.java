@@ -28,8 +28,11 @@ public class Period extends BaseEntity{
     private boolean planningEnabled;
 
     @Column(nullable = false)
+    private boolean active;
+
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private MonthName begingMounth;
+    private MonthName begingMonth;
 
     public enum MonthName {
         JAN(0), FEB(1), MAR(2), APR(3), MAY(4),
@@ -49,6 +52,6 @@ public class Period extends BaseEntity{
     @Column(nullable = false)
     private int yearPlanned;
     
-    @OneToMany(targetEntity = Plan.class, mappedBy = "period")
+    @OneToMany(targetEntity = Plan.class, mappedBy = "period", fetch = FetchType.EAGER)
     private List<Plan> plans;
 }

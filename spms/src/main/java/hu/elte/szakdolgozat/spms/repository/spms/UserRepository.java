@@ -5,9 +5,12 @@
  */
 package hu.elte.szakdolgozat.spms.repository.spms;
 
+import hu.elte.szakdolgozat.spms.model.entity.spms.Role;
 import hu.elte.szakdolgozat.spms.model.entity.spms.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  *
@@ -20,4 +23,5 @@ public interface UserRepository extends CrudRepository<User, Long> {
     
     User findByAgentCode(String agentCode);
 
+    List<User> findByRole(Role role);
 }

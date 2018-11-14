@@ -1,0 +1,10 @@
+#monitoring-table_wrapper{
+    width: 90%;
+    margin: auto;
+}
+
+.planning-period-starter {
+    display: flow-root;
+    margin-right: 25px;
+    margin-top: 10px;
+}

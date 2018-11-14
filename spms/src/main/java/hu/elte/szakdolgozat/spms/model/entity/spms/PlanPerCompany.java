@@ -53,7 +53,7 @@ public class PlanPerCompany extends BaseEntity{
     private BigDecimal sepPricePlan;
 
     @Column
-    private BigDecimal oktPricePlan;
+    private BigDecimal octPricePlan;
 
     @Column
     private BigDecimal novPricePlan;

@@ -10,5 +10,5 @@ public class PlanningPageViewModel {
     private String title;
     private List<String> headerMonths;
     private List<Integer> headerYears;
-    private List<List<PlanningTableCellModel>> planningTableRow;
+    private List<List<PlanningTableCellModel>> planningTableRowList;
 }
