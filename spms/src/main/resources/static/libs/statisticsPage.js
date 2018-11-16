@@ -4,7 +4,7 @@ function refreshOfficeData() {
 
     $.ajax({
         type: "POST",
-        url: "/rest/admin/refresh-office-data/" + from + "/" + to,
+        url: "/rest/statistics/refresh-office-data/" + from + "/" + to,
     }).done(function (data) {
         alert(data.message);
     });

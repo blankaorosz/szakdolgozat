@@ -31,6 +31,8 @@ function setPlanStatus(planId, status) {
         type: "POST",
         url: "/rest/plan/" + planId + "/status/" + status,
         contentType: "application/json",
+    }).done(function (data) {
+        alert(data.message);
     });
 }
 

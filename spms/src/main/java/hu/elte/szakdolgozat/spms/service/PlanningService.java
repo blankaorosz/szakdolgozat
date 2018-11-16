@@ -5,6 +5,8 @@ import hu.elte.szakdolgozat.spms.model.ui.PlanningPageViewModel;
 import hu.elte.szakdolgozat.spms.model.ui.PlanningTableCellModel;
 import hu.elte.szakdolgozat.spms.repository.spms.OrdersRepository;
 import hu.elte.szakdolgozat.spms.repository.spms.PlanPerCompanyRepository;
+import hu.elte.szakdolgozat.spms.repository.spms.PlanRepository;
+import hu.elte.szakdolgozat.spms.repository.spms.UserRepository;
 import hu.elte.szakdolgozat.spms.util.DateUtil;
 import hu.elte.szakdolgozat.spms.util.PlanPerCompanyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,39 @@ public class PlanningService {
     private OrdersRepository ordersRepository;
     @Autowired
     private PlanPerCompanyRepository planPerCompanyRepository;
+    @Autowired
+    private PlanRepository planRepository;
+    @Autowired
+    private UserRepository userRepository;
+
+    public void changePlanStatus(User user, Long planId, Plan.PlanStatus incomingPlanStatus) {
+        Optional<Plan> actualPlan = planRepository.findById(planId);
+        if(!actualPlan.isPresent()) {
+            throw new IllegalArgumentException("No plan found!");
+        }
+
+        switch (actualPlan.get().getStatus()) {
+            case AT_SALES:
+            case AT_SALES_FOR_EDIT:
+                if(!(actualPlan.get().getUser().getId().equals(user.getId())
+                    && incomingPlanStatus.equals(Plan.PlanStatus.AT_CONTROLLING))){
+                    throw new IllegalArgumentException("Wrong user or incoming status-set request at sales!");
+                }
+                actualPlan.get().setStatus(incomingPlanStatus);
+                break;
+            case AT_CONTROLLING:
+                if(!(incomingPlanStatus.equals(Plan.PlanStatus.AT_SALES_FOR_EDIT)
+                    || incomingPlanStatus.equals(Plan.PlanStatus.ACCEPTED) )){
+                    throw new IllegalArgumentException("Wrong incoming status-set request at controlling!");
+                }
+                actualPlan.get().setStatus(incomingPlanStatus);
+                break;
+            case ACCEPTED:
+                throw new IllegalArgumentException("Accepted plan status can not be changed!");
+        }
+
+        planRepository.save(actualPlan.get());
+    }
 
     public void savePlanningPage(List<PlanningTableCellModel> planningTableCellModelList) {
         Map<Long, PlanPerCompany> planPerCompanyById = new HashMap<>();
@@ -41,18 +76,60 @@ public class PlanningService {
         planPerCompanyRepository.saveAll(planPerCompanyById.values());
     }
 
-    public PlanningPageViewModel createPlanningPageViewModel(User user, Period period) {
-        Plan actualPlanOfUser = extractPlanForUser(period, user);
-
+    public PlanningPageViewModel createPlanningPageViewModel(User user, Long userIdForPlan, Period period) {
         PlanningPageViewModel planningPageViewModel = new PlanningPageViewModel();
-        planningPageViewModel.setPlanId(actualPlanOfUser.getId());
         planningPageViewModel.setHeaderMonths(generateMonthHeader(period));
         planningPageViewModel.setHeaderYears(generateYearHeader(period));
         planningPageViewModel.setTitle("Planning process - " + period.getYearPlanned());
+
+        Plan actualPlanOfUser;
+        List<User> salesUsers = null;
+
+        if (Role.RoleName.CONTROLLER.equals(user.getRole().getName())) {
+            salesUsers = collectSalesUsers(period);
+
+            if (userIdForPlan == null || !containsByUserId(salesUsers, userIdForPlan)) {
+                if (salesUsers.isEmpty()) {
+                    planningPageViewModel.setPlanningTableRowList(new ArrayList<>());
+                    return planningPageViewModel;
+                }
+                userIdForPlan = salesUsers.get(0).getId();
+            }
+            User selectedUser = userRepository.findById(userIdForPlan).get();
+
+            planningPageViewModel.setSelectedUser(selectedUser);
+            actualPlanOfUser = extractPlanForUser(period, selectedUser);
+        } else {
+            actualPlanOfUser = extractPlanForUser(period, user);
+        }
+
+        planningPageViewModel.setPlanId(actualPlanOfUser.getId());
         planningPageViewModel.setPlanningTableRowList(createPlanningTableRowList(actualPlanOfUser));
+        if (salesUsers != null) {
+            planningPageViewModel.setSalesUserList(collectSalesUsers(period));
+        }
         return planningPageViewModel;
     }
 
+    private boolean containsByUserId(List<User> users, Long userId) {
+        for (User u : users) {
+            if (u.getId().equals(userId)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private List<User> collectSalesUsers(Period period) {
+        List<User> salesUsers = new ArrayList<>();
+        for (Plan p : period.getPlans()) {
+           if(p.getStatus().equals(Plan.PlanStatus.AT_CONTROLLING)) {
+               salesUsers.add(p.getUser());
+           }
+        }
+        return salesUsers;
+    }
     private Plan extractPlanForUser(Period period, User user) {
         for (Plan p : period.getPlans()) {
             if (user.getAgentCode().equals(p.getUser().getAgentCode())) {
@@ -159,33 +236,5 @@ public class PlanningService {
         return  planningTableCellModel;
     }
 
-    private List<List<PlanningTableCellModel>> mockPlanningTableRow() {
-        List<List<PlanningTableCellModel>> planningTableRowList = new ArrayList<>(15);
-        for(int i = 0; i < 15; i++){
-            List<PlanningTableCellModel> planningTableCellModel = new ArrayList<>(25);
-            planningTableRowList.add(planningTableCellModel);
-            planningTableCellModel.add(new PlanningTableCellModel("Company name" + i,false,null,
-                    null,null,null,null));
-            for(int j = 0; j < 24; j++){
-                PlanningTableCellModel cell = new PlanningTableCellModel();
-                if(j % 2 == 0) {
-                    cell.setContent("20 000 ft");
-                    List<String> detailList = new ArrayList<>();
-                    detailList.add("alma" + i + "" + j);
-                    detailList.add("harom sarga gurulos fotel almatartoval");
-                    cell.setDetails(detailList);
-                    cell.setEditable(false);
-                }else {
-                    cell.setEditable(true);
-                    cell.setContent(i*j + "0 ft");
-                    cell.setCompanyId(1l);
-                    cell.setMonth(Period.MonthName.OCT);
-                    cell.setPlanId(1l);
-//                    cell.setPlanPerCompanyId(1l);
-                }
-                planningTableCellModel.add(cell);
-            }
-        }
-        return planningTableRowList;
-    }
+
 }

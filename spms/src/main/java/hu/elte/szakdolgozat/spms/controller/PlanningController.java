@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Optional;
 
@@ -24,16 +25,16 @@ public class PlanningController {
 
    @PreAuthorize("hasAnyRole('ROLE_SALES', 'ROLE_CONTROLLER')")
    @RequestMapping(method = RequestMethod.GET)
-   public String getPlanningPage(ModelMap model) {
+   public String getPlanningPage(@RequestParam(name = "userIdForPlan", required = false) Long userIdForPlan, ModelMap model) {
       User currentUser = SecurityUtil.getLoggedInUser();
-      Optional<Period> planningPeriod = periodRepository.findByActive(true);
+      Optional<Period> period = periodRepository.findByActive(true);
 
-      if (!planningPeriod.isPresent()) {
+      if (!period.isPresent()) {
          //TODO: handle this case
       }
 
       model.addAttribute("planningPageViewModel",
-              planningService.createPlanningPageViewModel(currentUser, planningPeriod.get()));
+              planningService.createPlanningPageViewModel(currentUser, userIdForPlan, period.get()));
       return "planningPage";
    }
 }

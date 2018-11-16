@@ -10,26 +10,20 @@
 
 
     <script type="text/javascript" charset="utf8" src="/libs/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" charset="utf8" src="/libs/gchart-loader.js"></script>
     <script type="text/javascript" charset="utf8" src="/libs/jquery-ui.js"></script>
     <script type="text/javascript" charset="utf8" src="/libs/statisticsPage.js"></script>
-    <script type="text/javascript">
-        // Load google charts
+    <script th:inline="javascript">
+
         google.charts.load('current', {'packages':['corechart']});
         google.charts.setOnLoadCallback(drawChart);
 
-        // Draw the chart and set the chart values
         function drawChart() {
             var data = google.visualization.arrayToDataTable([
                 ['Plan status type', 'Quantity per status'],
-                ['At sales', 8],
-                ['At controlling', 2],
-                ['Accepted', 4],
-                ['Sent back to sales', 2],
+                [(${statisticPageChartModel.toArrayString()})]
 
             ]);
-
-            // Optional; add a title and set the width and height of the chart
             var options = {
                 'title':'Sales plans status diagram',
                 'width':800,
@@ -40,6 +34,7 @@
             var chart = new google.visualization.PieChart(document.getElementById('piechart'));
             chart.draw(data, options);
         }
+
     </script>
 
     <script>
