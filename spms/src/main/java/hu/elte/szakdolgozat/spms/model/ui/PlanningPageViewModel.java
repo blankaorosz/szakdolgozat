@@ -1,5 +1,6 @@
 package hu.elte.szakdolgozat.spms.model.ui;
 
+import hu.elte.szakdolgozat.spms.model.entity.spms.Comment;
 import hu.elte.szakdolgozat.spms.model.entity.spms.User;
 import lombok.Data;
 
@@ -14,4 +15,5 @@ public class PlanningPageViewModel {
     private List<List<PlanningTableCellModel>> planningTableRowList;
     private List<User> salesUserList;
     private User selectedUser;
+    private List<Comment> comments;
 }

@@ -32,7 +32,7 @@ public class Period extends BaseEntity{
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private MonthName begingMonth;
+    private MonthName beginMonth;
 
     public enum MonthName {
         JAN(0), FEB(1), MAR(2), APR(3), MAY(4),

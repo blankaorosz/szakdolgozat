@@ -22,8 +22,6 @@ public interface CommentRepository extends CrudRepository<Comment, Long> {
 
     List<Comment> findByNameFrom(String nameFrom);
 
-    List<Comment> findByNameTo(String nameTo);
-
     List<Comment> findByChecked(boolean checked);
 
     List<Comment> findByPlan(Plan plan);

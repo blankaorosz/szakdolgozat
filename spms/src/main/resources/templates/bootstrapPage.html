@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Start</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+
+    <script type="text/javascript" charset="utf8" src="/libs/planningStarter.js"></script>
+    <script type="text/javascript" charset="utf8" src="/libs/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+    <header th:insert="pageHeader.html :: header"></header>
+    <div sec:authorize="hasRole('ROLE_CEO')"
+         class="first-planning-period-starter">
+        <button class="spms-button" onclick="startPlanning()"> Start new planning period </button>
+    </div>
+    
+</body>
+</html>

@@ -33,6 +33,24 @@ function setPlanStatus(planId, status) {
         contentType: "application/json",
     }).done(function (data) {
         alert(data.message);
+        if(data.success) {
+           location.reload(true);
+        }
+    });
+}
+
+function addComment(planId) {
+    var text = $("#commentArea").val();
+    $.ajax({
+        type: "POST",
+        url: "/rest/plan/" + planId + "/addComment",
+        data: text,
+        contentType: "text/html",
+    }).done(function (data) {
+        alert(data.message);
+        if(data.success) {
+            location.reload(true);
+        }
     });
 }
 

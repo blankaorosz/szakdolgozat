@@ -81,3 +81,13 @@ div.dataTables_wrapper {
 .highlight {
     background-color: salmon !important;
 }
+
+.first-planning-period-starter {
+    position:fixed;
+    top: 50%;
+    left: 50%;
+    width:30em;
+    height:18em;
+    margin-top: -9em;
+    margin-left: -15em;
+}

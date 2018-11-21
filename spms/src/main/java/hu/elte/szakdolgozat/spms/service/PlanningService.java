@@ -3,11 +3,9 @@ package hu.elte.szakdolgozat.spms.service;
 import hu.elte.szakdolgozat.spms.model.entity.spms.*;
 import hu.elte.szakdolgozat.spms.model.ui.PlanningPageViewModel;
 import hu.elte.szakdolgozat.spms.model.ui.PlanningTableCellModel;
-import hu.elte.szakdolgozat.spms.repository.spms.OrdersRepository;
-import hu.elte.szakdolgozat.spms.repository.spms.PlanPerCompanyRepository;
-import hu.elte.szakdolgozat.spms.repository.spms.PlanRepository;
-import hu.elte.szakdolgozat.spms.repository.spms.UserRepository;
+import hu.elte.szakdolgozat.spms.repository.spms.*;
 import hu.elte.szakdolgozat.spms.util.DateUtil;
+import hu.elte.szakdolgozat.spms.util.PeriodUtil;
 import hu.elte.szakdolgozat.spms.util.PlanPerCompanyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +24,8 @@ public class PlanningService {
     private PlanRepository planRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private CommentRepository commentRepository;
 
     public void changePlanStatus(User user, Long planId, Plan.PlanStatus incomingPlanStatus) {
         Optional<Plan> actualPlan = planRepository.findById(planId);
@@ -78,7 +78,7 @@ public class PlanningService {
 
     public PlanningPageViewModel createPlanningPageViewModel(User user, Long userIdForPlan, Period period) {
         PlanningPageViewModel planningPageViewModel = new PlanningPageViewModel();
-        planningPageViewModel.setHeaderMonths(generateMonthHeader(period));
+        planningPageViewModel.setHeaderMonths(PeriodUtil.generateMonthHeader(period));
         planningPageViewModel.setHeaderYears(generateYearHeader(period));
         planningPageViewModel.setTitle("Planning process - " + period.getYearPlanned());
 
@@ -98,17 +98,28 @@ public class PlanningService {
             User selectedUser = userRepository.findById(userIdForPlan).get();
 
             planningPageViewModel.setSelectedUser(selectedUser);
-            actualPlanOfUser = extractPlanForUser(period, selectedUser);
+            actualPlanOfUser = PeriodUtil.findPlanForSalesUserFromPeriod(period, selectedUser);
         } else {
-            actualPlanOfUser = extractPlanForUser(period, user);
+            actualPlanOfUser = PeriodUtil.findPlanForSalesUserFromPeriod(period, user);
         }
 
         planningPageViewModel.setPlanId(actualPlanOfUser.getId());
+        planningPageViewModel.setComments(commentRepository.findByPlan(actualPlanOfUser));
         planningPageViewModel.setPlanningTableRowList(createPlanningTableRowList(actualPlanOfUser));
         if (salesUsers != null) {
             planningPageViewModel.setSalesUserList(collectSalesUsers(period));
         }
         return planningPageViewModel;
+    }
+
+    public Comment addComment(Long planId, User user, String commentText) {
+        Comment comment = new Comment();
+        comment.setChecked(false);
+        comment.setNameFrom(user.getUserName());
+        comment.setPlan(planRepository.findById(planId).get());
+        comment.setText(commentText);
+
+        return commentRepository.save(comment);
     }
 
     private boolean containsByUserId(List<User> users, Long userId) {
@@ -130,37 +141,7 @@ public class PlanningService {
         }
         return salesUsers;
     }
-    private Plan extractPlanForUser(Period period, User user) {
-        for (Plan p : period.getPlans()) {
-            if (user.getAgentCode().equals(p.getUser().getAgentCode())) {
-                return p;
-            }
-        }
 
-        throw new IllegalStateException(
-                String.format("Plan cannot be found for User[%s] in Period[%s]", user.getUserName(), period.getId())
-        );
-    }
-
-    private List<String> generateMonthHeader(Period period) {
-        Period.MonthName beginMonthName = period.getBegingMonth();
-        Period.MonthName[] monthNames = Period.MonthName.values();
-        int indexesDone = 0;
-
-        List <String> months = new ArrayList<>(12);
-
-        for(int i = beginMonthName.getIndex(); i< monthNames.length; i++) {
-            months.add(monthNames[i].name());
-            indexesDone++;
-        }
-
-        int indexesLeft = monthNames.length - indexesDone;
-        for (int i = 0; i< indexesLeft; i++) {
-            months.add(monthNames[i].name());
-        }
-
-        return months;
-    }
 
     private List<Integer> generateYearHeader(Period period) {
         int actualPlanningYear = period.getYearPlanned();
@@ -235,6 +216,7 @@ public class PlanningService {
         }
         return  planningTableCellModel;
     }
+
 
 
 }

@@ -133,15 +133,23 @@
         <button class="spms-button" onclick="savePlan()"> Save</button>
     </div>
 
-    <div class="comment-section" sec:authorize="hasRole('ROLE_SALES')">
+    <div class="comment-section">
         <h3>Comments:</h3>
         <hr>
+        <div th:each="comment : ${planningPageViewModel.comments}" >
+            <p th:text="${comment.nameFrom} + ': '"></p>
+            <p th:text="${comment.text}"></p>
+            <hr>
+        </div>
+
+
     </div>
 
     <div class="comment-section" sec:authorize="hasRole('ROLE_CONTROLLER')">
         <h3>Add a comment:</h3>
         <hr>
-        <textarea rows="8" cols="80" name="comment">Enter your comment here...</textarea>
+        <textarea id="commentArea" rows="8" cols="80" name="comment" placeholder="Enter your comment here..."></textarea>
+        <button class="spms-button" th:onclick="'addComment('+ ${planningPageViewModel.planId} + ')'"> Add comment</button>
     </div>
 
 </body>

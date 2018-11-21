@@ -1,5 +1,6 @@
 package hu.elte.szakdolgozat.spms.controller.rest;
 
+import hu.elte.szakdolgozat.spms.model.entity.spms.Comment;
 import hu.elte.szakdolgozat.spms.model.entity.spms.Plan;
 import hu.elte.szakdolgozat.spms.model.entity.spms.User;
 import hu.elte.szakdolgozat.spms.model.rest.SpmsRestResponse;
@@ -57,4 +58,25 @@ public class PlanningRestController {
 
         return response;
     }
+
+    @PreAuthorize("hasRole('ROLE_CONTROLLER')")
+    @PostMapping(value = "/{id}/addComment", consumes = "text/html", produces = "application/json")
+    public SpmsRestResponse<Comment> addComment(@PathVariable("id") Long planId, @RequestBody String commentText) {
+        SpmsRestResponse<Comment> response = new SpmsRestResponse();
+        User currentUser = SecurityUtil.getLoggedInUser();
+        try {
+            Comment c = planningService.addComment(planId,currentUser, commentText);
+            c.setPlan(null);
+            response.setContent(c);
+            response.setSuccess(true);
+            response.setMessage("Comment successfully added!");
+        } catch (Exception ex) {
+            response.setSuccess(false);
+            response.setMessage("Comment could not be added: " + ex.getMessage());
+            log.error("", ex);
+        }
+
+        return response;
+    }
 }
+

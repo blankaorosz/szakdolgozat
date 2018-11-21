@@ -36,7 +36,7 @@ public class DefaultController {
                         return "redirect:monitoringPage";
                     }
                 }
-                return "redirect:monitoringPage";
+                return "redirect:bootstrapPage";
             case ADMIN:
                 return "redirect:adminPage";
         }

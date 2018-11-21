@@ -9,3 +9,15 @@ function refreshOfficeData() {
         alert(data.message);
     });
 }
+
+function startMonitoring() {
+    $.ajax({
+        type: "POST",
+        url: "/rest/statistics/monitoring-period/start",
+    }).done(function (data) {
+        alert(data.message);
+        if(data.success) {
+            window.location.replace("/monitoringPage")
+        }
+    });
+}

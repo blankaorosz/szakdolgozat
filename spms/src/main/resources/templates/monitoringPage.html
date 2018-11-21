@@ -13,21 +13,16 @@
     <script type="text/javascript" charset="utf8" src="/libs/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" charset="utf8" src="/libs/jquery.dataTables.js"></script>
     <script type="text/javascript" charset="utf8" src="/libs/dataTables.fixedColumns.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="/libs/monitoringPage.js"></script>
+    <script type="text/javascript" charset="utf8" src="/libs/planningStarter.js"></script>
 
-    <script>
+    <script th:inline="javascript">
         $(document).ready(function () {
             $('#monitoring-table').DataTable(
                 {
                     scrollX: true,
                     fixedColumns: {
-                        leftColumns: 2
-                    },
-                     columnDefs: [
-                         { orderable: false, targets: [2,3,4,5,6,7,8,9,10,
-                                 11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,
-                                 30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49] }
-                     ]
+                        leftColumns: 1
+                    }
                 }
             );
         });
@@ -50,335 +45,37 @@
     <table id="monitoring-table" class="stripe row-border order-column" style="width:100%">
         <thead>
             <tr>
-                <th rowspan="2" class="non-transparent-white">Company</th>
-                <th rowspan="2" class="non-transparent-white">Sales person</th>
-                <th colspan="4">jan</th>
-                <th colspan="4">feb</th>
-                <th colspan="4">mar</th>
-                <th colspan="4">apr</th>
-                <th colspan="4">may</th>
-                <th colspan="4">jun</th>
-                <th colspan="4">jul</th>
-                <th colspan="4">aug</th>
-                <th colspan="4">sep</th>
-                <th colspan="4">okt</th>
-                <th colspan="4">nov</th>
-                <th colspan="4">dec</th>
+                <th class="non-transparent-white" th:if="${monitoringPageViewModel.headerTitles.size() == 49}">
+                    &nbsp;
+                </th>
+                <th class="non-transparent-white" colspan="2" th:if="${monitoringPageViewModel.headerTitles.size() == 50}">
+                    &nbsp;
+                </th>
+                <th colspan="4" th:each="month : ${monitoringPageViewModel.headerMonths}" th:text="${month}"></th>
             </tr>
             <tr>
-                <th>Plnned</th>
-                <th>Actual</th>
-                <th>Time spent %</th>
-                <th>Difference %</th>
-                <th>Plnned</th>
-                <th>Actual</th>
-                <th>Time spent %</th>
-                <th>Difference %</th>
-                <th>Plnned</th>
-                <th>Actual</th>
-                <th>Time spent %</th>
-                <th>Difference %</th>
-                <th>Plnned</th>
-                <th>Actual</th>
-                <th>Time spent %</th>
-                <th>Difference %</th>
-                <th>Plnned</th>
-                <th>Actual</th>
-                <th>Time spent %</th>
-                <th>Difference %</th>
-                <th>Plnned</th>
-                <th>Actual</th>
-                <th>Time spent %</th>
-                <th>Difference %</th>
-                <th>Plnned</th>
-                <th>Actual</th>
-                <th>Time spent %</th>
-                <th>Difference %</th>
-                <th>Plnned</th>
-                <th>Actual</th>
-                <th>Time spent %</th>
-                <th>Difference %</th>
-                <th>Plnned</th>
-                <th>Actual</th>
-                <th>Time spent %</th>
-                <th>Difference %</th>
-                <th>Plnned</th>
-                <th>Actual</th>
-                <th>Time spent %</th>
-                <th>Difference %</th>
-                <th>Plnned</th>
-                <th>Actual</th>
-                <th>Time spent %</th>
-                <th>Difference %</th>
-                <th>Plnned</th>
-                <th>Actual</th>
-                <th>Time spent %</th>
-                <th>Difference %</th>
+                <th class="non-transparent-white" th:each="title : ${monitoringPageViewModel.headerTitles}"
+                    th:text="${title}"></th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>cégnév</td>
-                <td>embernév</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-            </tr>
-            <tr>
-                <td>cégnév</td>
-                <td>embernév</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-            </tr>
-            <tr>
-                <td>cégnév</td>
-                <td>embernév</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-            </tr>
-            <tr>
-                <td>cégnév</td>
-                <td>embernév</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-                <td>100000ft</td>
-                <td>50000ft</td>
-                <td>10%</td>
-                <td>50%</td>
-            </tr>
+           <tr th:each="row : ${monitoringPageViewModel.rows}">
+               <td th:text="${row.companyName}"></td>
+               <td th:if="${monitoringPageViewModel.headerTitles.size() == 50}" th:text="${row.personName}"></td>
+               <th:block th:each="value : ${row.columnValues}">
+                   <td th:text="${value.actualAmount}"></td>
+                   <td th:text="${value.plannedAmount}"></td>
+                   <td th:text="${value.percentDone}"></td>
+                   <td th:text="${value.percentOfTimeGone}"></td>
+               </th:block>
+           </tr>
+
         </tbody>
         <tfoot>
 
             <tr>
-                <th class="non-transparent-white">Company</th>
-                <th class="non-transparent-white">Person</th>
-                <th>Plnned</th>
-                <th>Actual</th>
-                <th>Time spent %</th>
-                <th>Difference %</th>
-                <th>Plnned</th>
-                <th>Actual</th>
-                <th>Time spent %</th>
-                <th>Difference %</th>
-                <th>Plnned</th>
-                <th>Actual</th>
-                <th>Time spent %</th>
-                <th>Difference %</th>
-                <th>Plnned</th>
-                <th>Actual</th>
-                <th>Time spent %</th>
-                <th>Difference %</th>
-                <th>Plnned</th>
-                <th>Actual</th>
-                <th>Time spent %</th>
-                <th>Difference %</th>
-                <th>Plnned</th>
-                <th>Actual</th>
-                <th>Time spent %</th>
-                <th>Difference %</th>
-                <th>Plnned</th>
-                <th>Actual</th>
-                <th>Time spent %</th>
-                <th>Difference %</th>
-                <th>Plnned</th>
-                <th>Actual</th>
-                <th>Time spent %</th>
-                <th>Difference %</th>
-                <th>Plnned</th>
-                <th>Actual</th>
-                <th>Time spent %</th>
-                <th>Difference %</th>
-                <th>Plnned</th>
-                <th>Actual</th>
-                <th>Time spent %</th>
-                <th>Difference %</th>
-                <th>Plnned</th>
-                <th>Actual</th>
-                <th>Time spent %</th>
-                <th>Difference %</th>
-                <th>Plnned</th>
-                <th>Actual</th>
-                <th>Time spent %</th>
-                <th>Difference %</th>
+                <th class="non-transparent-white" th:each="title : ${monitoringPageViewModel.headerTitles}"
+                th:text="${title}"></th>
             </tr>
         </tfoot>
     </table>

@@ -54,6 +54,7 @@ public class DateUtil {
         c.set(Calendar.MINUTE, 0);
         c.set(Calendar.HOUR, 0);
         c.set(Calendar.MONTH, 0);
+        c.set(Calendar.DAY_OF_MONTH, 0);
 
         return c;
     }

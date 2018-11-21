@@ -26,13 +26,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode
 public class Comment extends BaseEntity{
-    
+    @Column(nullable = false)
+    private String text;
+
     @Column(nullable = false)
     private String nameFrom;
-    
-    @Column(nullable = false)
-    private String nameTo;
-    
+
     @Column(nullable = false)
     private boolean checked;
     
