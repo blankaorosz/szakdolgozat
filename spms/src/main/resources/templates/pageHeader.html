@@ -10,6 +10,7 @@
         <img src="/images/logo.png" id="header-img"/>
         <div sec:authorize="isAuthenticated()"
              class="logout" >
+            <div th:text="'Welcome ' + ${userName} + '!'"></div>
             <a href="/logout">LOG OUT</a>
         </div>
     </div>

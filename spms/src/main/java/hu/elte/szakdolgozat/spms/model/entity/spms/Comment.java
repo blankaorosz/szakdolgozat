@@ -32,9 +32,6 @@ public class Comment extends BaseEntity{
     @Column(nullable = false)
     private String nameFrom;
 
-    @Column(nullable = false)
-    private boolean checked;
-    
     @JoinColumn
     @ManyToOne(targetEntity = Plan.class)
     private Plan plan;

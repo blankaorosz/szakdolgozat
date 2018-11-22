@@ -59,7 +59,7 @@ public class PlanningRestController {
         return response;
     }
 
-    @PreAuthorize("hasRole('ROLE_CONTROLLER')")
+    @PreAuthorize("hasAnyRole('ROLE_CONTROLLER', 'ROLE_SALES')")
     @PostMapping(value = "/{id}/addComment", consumes = "text/html", produces = "application/json")
     public SpmsRestResponse<Comment> addComment(@PathVariable("id") Long planId, @RequestBody String commentText) {
         SpmsRestResponse<Comment> response = new SpmsRestResponse();

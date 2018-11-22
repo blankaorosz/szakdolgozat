@@ -1,6 +1,7 @@
 package hu.elte.szakdolgozat.spms.controller;
 
 import hu.elte.szakdolgozat.spms.model.entity.spms.Period;
+import hu.elte.szakdolgozat.spms.model.entity.spms.Role;
 import hu.elte.szakdolgozat.spms.model.entity.spms.User;
 import hu.elte.szakdolgozat.spms.repository.spms.PeriodRepository;
 import hu.elte.szakdolgozat.spms.service.MonitoringService;
@@ -30,11 +31,19 @@ public class MonitoringController {
         Optional<Period> period = periodRepository.findByActive(true);
 
         if (!period.isPresent()) {
-            //TODO: handle this case
+            if(currentUser.getRole().getName().equals(Role.RoleName.CEO)){
+                return "redirect:/";
+            }
+            throw new IllegalStateException("There is no active period yet, please wait for the CEO to start a new one " +
+                    "or contact the administrator!");
         }
 
+        if(period.get().isPlanningEnabled()) {
+            return "redirect:/";
+        }
         model.addAttribute("monitoringPageViewModel",
                 monitoringService.createMonitoringTableViewModel(currentUser,period.get()));
+        model.addAttribute("userName", currentUser.getUserName());
         return "monitoringPage";
     }
 }

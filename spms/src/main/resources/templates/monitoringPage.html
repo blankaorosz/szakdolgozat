@@ -51,11 +51,11 @@
                 <th class="non-transparent-white" colspan="2" th:if="${monitoringPageViewModel.headerTitles.size() == 50}">
                     &nbsp;
                 </th>
-                <th colspan="4" th:each="month : ${monitoringPageViewModel.headerMonths}" th:text="${month}"></th>
+                <th class="cell-border" colspan="4" th:each="month : ${monitoringPageViewModel.headerMonths}" th:text="${month}"></th>
             </tr>
             <tr>
-                <th class="non-transparent-white" th:each="title : ${monitoringPageViewModel.headerTitles}"
-                    th:text="${title}"></th>
+                <th th:each="title, iter : ${monitoringPageViewModel.headerTitles}"
+                    th:classappend="${iter.first} ? non-transparent-white" th:text="${title}"></th>
             </tr>
         </thead>
         <tbody>
@@ -63,7 +63,7 @@
                <td th:text="${row.companyName}"></td>
                <td th:if="${monitoringPageViewModel.headerTitles.size() == 50}" th:text="${row.personName}"></td>
                <th:block th:each="value : ${row.columnValues}">
-                   <td th:text="${value.actualAmount}"></td>
+                   <td class="left-bordered-cell" th:text="${value.actualAmount}"></td>
                    <td th:text="${value.plannedAmount}"></td>
                    <td th:text="${value.percentDone}"></td>
                    <td th:text="${value.percentOfTimeGone}"></td>
@@ -74,8 +74,8 @@
         <tfoot>
 
             <tr>
-                <th class="non-transparent-white" th:each="title : ${monitoringPageViewModel.headerTitles}"
-                th:text="${title}"></th>
+                <th th:each="title, iter : ${monitoringPageViewModel.headerTitles}"
+                    th:classappend="${iter.first} ? non-transparent-white" th:text="${title}"></th>
             </tr>
         </tfoot>
     </table>

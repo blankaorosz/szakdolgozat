@@ -27,6 +27,7 @@ function savePlan() {
 }
 
 function setPlanStatus(planId, status) {
+    savePlan();
     $.ajax({
         type: "POST",
         url: "/rest/plan/" + planId + "/status/" + status,
@@ -40,6 +41,7 @@ function setPlanStatus(planId, status) {
 }
 
 function addComment(planId) {
+    savePlan();
     var text = $("#commentArea").val();
     $.ajax({
         type: "POST",

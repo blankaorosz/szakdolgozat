@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Error</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+</head>
+<body>
+    <header th:insert="pageHeader.html :: header"></header>
+
+    <h1>Ooops!</h1>
+    <table>
+        <tr>
+            <td>Date</td>
+            <td th:text="${timestamp}"></td>
+        </tr>
+        <tr>
+            <td>Error</td>
+            <td th:text="${error}"></td>
+        </tr>
+        <tr>
+            <td>Status</td>
+            <td th:text="${status}"></td>
+        </tr>
+        <tr>
+            <td>Message</td>
+            <td th:text="${message}"></td>
+        </tr>
+    </table>
+    
+</body>
+</html>

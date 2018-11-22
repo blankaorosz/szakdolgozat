@@ -73,6 +73,7 @@
         </form>
     </div>
 
+
     <table id="planning-table" class="stripe row-border order-column" style="width:100%">
         <thead>
             <tr>
@@ -119,18 +120,26 @@
     </table>
 
     <div class="planning-table-buttons-div">
-        <button class="spms-button" sec:authorize="hasRole('ROLE_CONTROLLER')"
+        <button th:if="${planningPageViewModel.planStatus == 'AT_CONTROLLING'}"
+                class="spms-button" sec:authorize="hasRole('ROLE_CONTROLLER')"
                 th:onclick="'setPlanStatus(' + ${planningPageViewModel.planId} + ', \'ACCEPTED\')'"> Accept
         </button>
-        <button class="spms-button" sec:authorize="hasRole('ROLE_CONTROLLER')"
+        <button th:if="${planningPageViewModel.planStatus == 'AT_CONTROLLING'}"
+                class="spms-button" sec:authorize="hasRole('ROLE_CONTROLLER')"
                 th:onclick="'setPlanStatus(' + ${planningPageViewModel.planId} + ', \'AT_SALES_FOR_EDIT\')'"> Send back
             to sales
         </button>
-        <button class="spms-button" sec:authorize="hasRole('ROLE_SALES')"
+        <button th:if="${planningPageViewModel.planStatus == 'AT_SALES_FOR_EDIT' || planningPageViewModel.planStatus == 'AT_SALES'}"
+                class="spms-button" sec:authorize="hasRole('ROLE_SALES')"
                 th:onclick="'setPlanStatus(' + ${planningPageViewModel.planId} + ', \'AT_CONTROLLING\')'"> Send to
             controlling
         </button>
-        <button class="spms-button" onclick="savePlan()"> Save</button>
+        <button sec:authorize="hasRole('ROLE_SALES')"
+                th:if="${planningPageViewModel.planStatus == 'AT_SALES_FOR_EDIT' || planningPageViewModel.planStatus == 'AT_SALES'}"
+                class="spms-button" onclick="savePlan()"> Save</button>
+        <button sec:authorize="hasRole('ROLE_CONTROLLER')"
+                th:if="${planningPageViewModel.planStatus == 'AT_CONTROLLING'}"
+                class="spms-button" onclick="savePlan()"> Save</button>
     </div>
 
     <div class="comment-section">
@@ -141,11 +150,20 @@
             <p th:text="${comment.text}"></p>
             <hr>
         </div>
-
-
     </div>
 
-    <div class="comment-section" sec:authorize="hasRole('ROLE_CONTROLLER')">
+    <div sec:authorize="hasRole('ROLE_SALES')"
+         th:if="${planningPageViewModel.planStatus == 'AT_SALES_FOR_EDIT' || planningPageViewModel.planStatus == 'AT_SALES'}"
+         class="comment-section">
+        <h3>Add a comment:</h3>
+        <hr>
+        <textarea id="commentArea" rows="8" cols="80" name="comment" placeholder="Enter your comment here..."></textarea>
+        <button class="spms-button" th:onclick="'addComment('+ ${planningPageViewModel.planId} + ')'"> Add comment</button>
+    </div>
+
+    <div sec:authorize="hasRole('ROLE_CONTROLLER')"
+         th:if="${planningPageViewModel.planStatus == 'AT_CONTROLLING'}"
+         class="comment-section">
         <h3>Add a comment:</h3>
         <hr>
         <textarea id="commentArea" rows="8" cols="80" name="comment" placeholder="Enter your comment here..."></textarea>

@@ -2,8 +2,10 @@ package hu.elte.szakdolgozat.spms.controller;
 
 
 import hu.elte.szakdolgozat.spms.model.entity.spms.Role;
+import hu.elte.szakdolgozat.spms.model.entity.spms.User;
 import hu.elte.szakdolgozat.spms.repository.spms.RoleRepository;
 import hu.elte.szakdolgozat.spms.repository.spms.UserRepository;
+import hu.elte.szakdolgozat.spms.util.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -23,11 +25,14 @@ public class AdminController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(method = RequestMethod.GET)
     public String getAdminPage(ModelMap model) {
+        User currentUser = SecurityUtil.getLoggedInUser();
+
         model.addAttribute("users", userRepository.findAll());
         model.addAttribute("roleNames",
                 Arrays.stream(Role.RoleName.values())
                         .filter(roleName -> !Role.RoleName.SALES.equals(roleName))
                         .map(roleName -> roleName.name()).toArray());
+        model.addAttribute("userName", currentUser.getUserName());
 
         return "adminPage";
     }

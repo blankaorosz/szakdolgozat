@@ -22,7 +22,7 @@ public class AuthorizationController {
     @RequestMapping(method = RequestMethod.GET)
     public String login(ModelMap model) {
         if (!"anonymousUser".equals(SecurityContextHolder.getContext().getAuthentication().getPrincipal())) {
-            return "redirect:/planningPage";
+            return "redirect:/";
         }
       return "login";
     }

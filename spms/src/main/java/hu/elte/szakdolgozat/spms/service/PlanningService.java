@@ -104,6 +104,7 @@ public class PlanningService {
         }
 
         planningPageViewModel.setPlanId(actualPlanOfUser.getId());
+        planningPageViewModel.setPlanStatus(actualPlanOfUser.getStatus().name());
         planningPageViewModel.setComments(commentRepository.findByPlan(actualPlanOfUser));
         planningPageViewModel.setPlanningTableRowList(createPlanningTableRowList(actualPlanOfUser));
         if (salesUsers != null) {
@@ -114,7 +115,6 @@ public class PlanningService {
 
     public Comment addComment(Long planId, User user, String commentText) {
         Comment comment = new Comment();
-        comment.setChecked(false);
         comment.setNameFrom(user.getUserName());
         comment.setPlan(planRepository.findById(planId).get());
         comment.setText(commentText);

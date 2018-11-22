@@ -30,11 +30,16 @@ public class PlanningController {
       Optional<Period> period = periodRepository.findByActive(true);
 
       if (!period.isPresent()) {
-         //TODO: handle this case
+         throw new IllegalStateException("There is no active period yet, please wait for the CEO to start a new one " +
+                 "or contact the administrator!");
+      }
+      if(!period.get().isPlanningEnabled()) {
+         return "redirect:monitoringPage";
       }
 
       model.addAttribute("planningPageViewModel",
               planningService.createPlanningPageViewModel(currentUser, userIdForPlan, period.get()));
+      model.addAttribute("userName", currentUser.getUserName());
       return "planningPage";
    }
 }

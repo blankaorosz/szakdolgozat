@@ -1,5 +1,7 @@
 body{
     margin: 0px;
+    background-image: url("../images/background-1.jpg");
+    background-attachment: fixed;
 }
 
 #page-header{
@@ -64,7 +66,7 @@ div.dataTables_wrapper {
 }
 
 .non-transparent-white{
-    background-color: white;
+    background-color: #FFFFFF;
 }
 
 .title-underline-hr {
