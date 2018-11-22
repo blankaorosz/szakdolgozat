@@ -7,6 +7,7 @@ import hu.elte.szakdolgozat.spms.repository.office.OfficeCompanyDataRepository;
 import hu.elte.szakdolgozat.spms.repository.office.OfficeOrderItemDataRepository;
 import hu.elte.szakdolgozat.spms.repository.spms.*;
 import hu.elte.szakdolgozat.spms.util.DateUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
+@Slf4j
 public class CompanyAndOrderDataImporterService {
     @Autowired
     CompanyRepository companyRepository;
