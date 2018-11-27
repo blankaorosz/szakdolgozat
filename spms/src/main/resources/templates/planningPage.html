@@ -73,6 +73,18 @@
         </form>
     </div>
 
+    <div class="planning-sales-message" sec:authorize="hasRole('ROLE_SALES')"
+         th:if="${planningPageViewModel.planStatus == 'ACCEPTED'}">
+        <p>Your plan is already accepted. Your work is done here!</p>
+    </div>
+    <div class="planning-sales-message" sec:authorize="hasRole('ROLE_SALES')"
+         th:if="${planningPageViewModel.planStatus == 'AT_CONTROLLING'}">
+        <p>Plan can not be edited. Your plan is at controlling.</p>
+    </div>
+    <div class="planning-sales-message" sec:authorize="hasRole('ROLE_SALES')"
+         th:if="${planningPageViewModel.planStatus == 'AT_SALES_FOR_EDIT'}">
+        <p>Your plan was sent back by the controller!</p>
+    </div>
 
     <table id="planning-table" class="stripe row-border order-column" style="width:100%">
         <thead>
@@ -97,7 +109,8 @@
                          th:classappend="${not #lists.isEmpty(cell.details)} ? opener"
                          data-addclose="true"
                          data-bgcolor="#ce161c"
-                         th:attr="onclick=${not #lists.isEmpty(cell.details)} ? '$(this).showBalloon(event,{balloon:$(\'#prev-year-details-balloon'
+                         th:attr="onclick=${not #lists.isEmpty(cell.details)} ?
+                         '$(this).showBalloon(event,{balloon:$(\'#prev-year-details-balloon'
                             + ${rowIterStat.index} + ${cellIterStat.index} + '\')})'"
                          th:inline="text">
                         [[${cell.content}]]

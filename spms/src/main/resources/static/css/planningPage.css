@@ -32,3 +32,10 @@
 .planning-table-input-cell:invalid {
     color: red;
 }
+
+.planning-sales-message {
+    text-align: center;
+    color: salmon;
+    font-family: Rockwell;
+    font-style: italic;
+}

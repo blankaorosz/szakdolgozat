@@ -9,7 +9,6 @@ import hu.elte.szakdolgozat.spms.model.entity.spms.Company;
 import hu.elte.szakdolgozat.spms.model.entity.spms.Order;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -19,8 +18,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface OrdersRepository extends CrudRepository<Order, Long> {
-    
-    List<Order> findByOrderDate(Date orderDate);
 
     List<Order> findByCompanyAndOrderDateBetween(Company company, Date from, Date to);
 }

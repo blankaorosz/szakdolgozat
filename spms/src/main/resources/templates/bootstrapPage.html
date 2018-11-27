@@ -14,7 +14,7 @@
     <header th:insert="pageHeader.html :: header"></header>
     <div sec:authorize="hasRole('ROLE_CEO')"
          class="first-planning-period-starter">
-        <button class="spms-button" onclick="startPlanning()"> Start new planning period </button>
+        <button class="first-period-starter-button" onclick="startPlanning()"> Start new planning period </button>
     </div>
     
 </body>
