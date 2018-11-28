@@ -11,13 +11,17 @@ function refreshOfficeData() {
 }
 
 function startMonitoring() {
-    $.ajax({
-        type: "POST",
-        url: "/rest/statistics/monitoring-period/start",
-    }).done(function (data) {
-        alert(data.message);
-        if(data.success) {
-            window.location.replace("/monitoringPage")
-        }
-    });
+    var result = confirm("Are you sure you want to start the monitoring period?");
+    if(result) {
+        $.ajax({
+            type: "POST",
+            url: "/rest/statistics/monitoring-period/start",
+        }).done(function (data) {
+            alert(data.message);
+            if(data.success) {
+                window.location.replace("/monitoringPage")
+            }
+        });
+    }
+
 }

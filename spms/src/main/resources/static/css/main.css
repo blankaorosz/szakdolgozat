@@ -2,11 +2,46 @@ body{
     margin: 0px;
     background-image: url("../images/background-1.jpg");
     background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
+.error-img {
+    height: 332px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    filter: grayscale(21%);
+}
+
+.error-title {
+    font-family: Rockwell;
+}
+
+.home-btn-div {
+    display: flex;
+    margin-left: 4%;
+}
+
+.home-btn {
+    width: 105px;
+}
 #page-header{
     height: 150px;
     background-color: #ce161c;
+}
+
+.error-data {
+    margin-right: auto;
+    margin-left: auto;
+    font-family: Rockwell;
+    color: lightslategray;
+    font-size: 14px
+}
+
+.error-data-info-title {
+
 }
 
 .logout {

@@ -22,7 +22,9 @@ function savePlan() {
         data: JSON.stringify(planningTableCellArray),
         contentType: "application/json",
     }).done(function (data) {
-        alert(data.message);
+        if (!data.success) {
+            alert(data.message);
+        }
     });
 }
 
@@ -33,10 +35,12 @@ function setPlanStatus(planId, status) {
         url: "/rest/plan/" + planId + "/status/" + status,
         contentType: "application/json",
     }).done(function (data) {
-        alert(data.message);
         if(data.success) {
            location.reload(true);
+        } else {
+            alert(data.message);
         }
+
     });
 }
 
@@ -49,9 +53,10 @@ function addComment(planId) {
         data: text,
         contentType: "text/html",
     }).done(function (data) {
-        alert(data.message);
         if(data.success) {
             location.reload(true);
+        } else {
+            alert(data.message);
         }
     });
 }

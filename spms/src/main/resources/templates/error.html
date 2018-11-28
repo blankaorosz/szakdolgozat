@@ -6,26 +6,41 @@
     <meta charset="UTF-8">
     <title>Error</title>
     <link rel="stylesheet" type="text/css" href="/css/main.css">
+
+    <script type="text/javascript" charset="utf8" src="/libs/errorPage.js"></script>
 </head>
 <body>
     <header th:insert="pageHeader.html :: header"></header>
 
-    <h1>Ooops!</h1>
-    <table>
+    <div align="center">
+        <h1 class="error-title">Oops!</h1>
+    </div>
+
+    <div class="home-btn-div">
+        <button class="spms-button home-btn"
+                onclick="window.location.href='/'"> Home
+        </button>
+    </div>
+
+    <div>
+        <img src="/images/confused-error.png" alt="Error" class="error-img">
+    </div>
+
+    <table class="error-data">
         <tr>
-            <td>Date</td>
+            <td class="error-data-info-title">Date:</td>
             <td th:text="${timestamp}"></td>
         </tr>
         <tr>
-            <td>Error</td>
+            <td class="error-data-info-title">Error:</td>
             <td th:text="${error}"></td>
         </tr>
         <tr>
-            <td>Status</td>
+            <td class="error-data-info-title">Status:</td>
             <td th:text="${status}"></td>
         </tr>
         <tr>
-            <td>Message</td>
+            <td class="error-data-info-title">Message:</td>
             <td th:text="${message}"></td>
         </tr>
     </table>
