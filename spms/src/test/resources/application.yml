@@ -1,0 +1,24 @@
+---
+spring:
+    profiles: dev
+    jpa:
+        show-sql: false
+spms:
+    datasource:
+        url: jdbc:h2:mem:testdb
+        driverClassName: org.h2.Driver
+        username: sa
+        password:
+    jpa:
+        hibernate:
+            ddl-auto: create
+
+office:
+    datasource:
+        url: jdbc:h2:mem:testdbforoffice
+        driverClassName: org.h2.Driver
+        username: sa
+        password:
+    jpa:
+        hibernate:
+            ddl-auto: none

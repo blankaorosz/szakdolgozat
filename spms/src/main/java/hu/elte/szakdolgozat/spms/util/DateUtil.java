@@ -12,6 +12,8 @@ public class DateUtil {
 
     private static final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
+    private DateUtil() {}
+
     public static int getCurrentYear() {
         return Calendar.getInstance().get(Calendar.YEAR);
     }
@@ -52,7 +54,7 @@ public class DateUtil {
         c.set(Calendar.MILLISECOND, 0);
         c.set(Calendar.SECOND, 0);
         c.set(Calendar.MINUTE, 0);
-        c.set(Calendar.HOUR, 0);
+        c.set(Calendar.HOUR_OF_DAY, 0);
         c.set(Calendar.MONTH, 0);
         c.set(Calendar.DAY_OF_MONTH, 0);
 
