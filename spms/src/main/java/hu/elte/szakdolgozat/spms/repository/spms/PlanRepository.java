@@ -21,9 +21,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface PlanRepository extends CrudRepository<Plan, Long> {
-    List<Plan> findByStatus(PlanStatus status);
 
-    List<Plan> findByPeriod(Period period);
-
-    List<Plan> findByUser(User user);
 }

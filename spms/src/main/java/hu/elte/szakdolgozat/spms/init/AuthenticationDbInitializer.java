@@ -104,13 +104,6 @@ public class AuthenticationDbInitializer {
     }
      
      private void mockUser() {
-         User user1 = new User();
-         user1.setUserName("Értékesítő Édua");
-         user1.setAgentCode("E1");
-         user1.setPassword(encoder.encode("asd"));
-         user1.setRole(roleRepository.findByName(Role.RoleName.SALES));
-         
-         userRepository.save(user1);
 
          User user2 = new User();
          user2.setUserName("Controller Cintia");

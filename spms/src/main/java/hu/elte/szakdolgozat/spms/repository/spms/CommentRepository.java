@@ -20,8 +20,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CommentRepository extends CrudRepository<Comment, Long> {
 
-    List<Comment> findByNameFrom(String nameFrom);
-
     List<Comment> findByPlan(Plan plan);
 
 }

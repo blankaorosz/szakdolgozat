@@ -20,8 +20,6 @@ import java.util.List;
 public interface UserRepository extends CrudRepository<User, Long> {
     
     User findByUserName(String userName);
-    
-    User findByAgentCode(String agentCode);
 
     List<User> findByRole(Role role);
 }

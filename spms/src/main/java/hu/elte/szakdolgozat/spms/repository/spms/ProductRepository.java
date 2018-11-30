@@ -20,8 +20,4 @@ import java.util.List;
 public interface ProductRepository extends CrudRepository<Product, Long> {
     
     Product findByName(String name);
-
-    List<Product> findByPrice(BigDecimal price);
-
-    List<Product> findByUnit(String unit);
 }

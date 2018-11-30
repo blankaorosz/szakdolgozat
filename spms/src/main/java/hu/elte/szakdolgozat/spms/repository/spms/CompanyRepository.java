@@ -21,8 +21,4 @@ import org.springframework.stereotype.Repository;
 public interface CompanyRepository extends CrudRepository<Company, Long> {
 
     Company findByName(String name);
-
-    List<Company> findByActive(boolean active);
-
-    List<Company> findByUser(User user);
 }

@@ -21,13 +21,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface OrderItemRepository extends CrudRepository<OrderItem, Long> {
 
-    List<OrderItem> findByQuantity(int quantity);
-
-    List<OrderItem> findByProductPriceAtOrderTime(BigDecimal productPriceAtOrderTime);
-
-    List<OrderItem> findByOrder(Order order);
-
-    List<OrderItem> findByProduct(Product product);
-
     Optional<OrderItem> findByOfficeOrderItemCode(String officeOrderItemCode);
 }
