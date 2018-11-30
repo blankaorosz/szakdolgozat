@@ -105,7 +105,7 @@ public class AuthenticationDbInitializer {
      
      private void mockUser() {
          User user1 = new User();
-         user1.setUserName("Kovács Ede");
+         user1.setUserName("Értékesítő Édua");
          user1.setAgentCode("E1");
          user1.setPassword(encoder.encode("asd"));
          user1.setRole(roleRepository.findByName(Role.RoleName.SALES));
@@ -113,21 +113,21 @@ public class AuthenticationDbInitializer {
          userRepository.save(user1);
 
          User user2 = new User();
-         user2.setUserName("ControllerAranka");
+         user2.setUserName("Controller Cintia");
          user2.setPassword(encoder.encode("asd"));
          user2.setRole(roleRepository.findByName(Role.RoleName.CONTROLLER));
 
          userRepository.save(user2);
 
          User adminUser = new User();
-         adminUser.setUserName("AdminAladar");
+         adminUser.setUserName("Admin Aladár");
          adminUser.setPassword(encoder.encode("asd"));
          adminUser.setRole(roleRepository.findByName(Role.RoleName.ADMIN));
 
          userRepository.save(adminUser);
 
          User ceoUser = new User();
-         ceoUser.setUserName("CeoCecil");
+         ceoUser.setUserName("Ceo Cecil");
          ceoUser.setPassword(encoder.encode("asd"));
          ceoUser.setRole(roleRepository.findByName(Role.RoleName.CEO));
 
