@@ -78,6 +78,5 @@ public class OfficeDbConfig {
         return new JpaTransactionManager(entityManagerFactory);
     }
 
-    //TODO ezt leirni -- db kapcs. -- https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html?fbclid=IwAR3FtD8bd28MYrQ794XcCSrHvR4VZOVPCnKA30f0CX3gmbVnkjCOU6UnNXQ
 
 }

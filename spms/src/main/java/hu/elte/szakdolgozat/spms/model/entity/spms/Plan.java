@@ -29,7 +29,7 @@ public class Plan extends BaseEntity{
     private PlanStatus status;
 
     public enum PlanStatus {
-        AT_SALES, AT_CONTROLLING, ACCEPTED, AT_SALES_FOR_EDIT //A plan with a comment at the sales is sent back to be edited
+        AT_SALES, AT_CONTROLLING, ACCEPTED, AT_SALES_FOR_EDIT
     }
     
     @JoinColumn

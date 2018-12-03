@@ -56,9 +56,17 @@
     <header th:insert="pageHeader.html :: header"></header>
 
 
-    <div align="center">
+    <div align="center" class="tooltip" sec:authorize="hasRole('ROLE_CONTROLLER')">
         <H1><span th:text="${planningPageViewModel.title}"></span></H1>
+        <span class="tooltiptext">In this page you can check the sales plans.
+            Click on the previous year amount fields to check the transaction details!</span>
     </div>
+    <div align="center" class="tooltip" sec:authorize="hasRole('ROLE_SALES')">
+        <H1><span th:text="${planningPageViewModel.title}"></span></H1>
+        <span class="tooltiptext">In this page you can make your plans for the next year.
+            Click on the previous year amount fields to check the transaction details!</span>
+    </div>
+
     <hr class="title-underline-hr">
 
     <div class="choose-sales-div" sec:authorize="hasRole('ROLE_CONTROLLER')" align="center">
@@ -105,7 +113,7 @@
                          data-companyid=${cell.companyId},
                          data-planpercompanyid=${cell.planPerCompanyId},
                          data-month=${cell.month.name()}"/>
-                    <div th:unless="${cell.editable}"
+                    <div th:unless="${cell.editable}" title="click for the details"
                          th:classappend="${not #lists.isEmpty(cell.details)} ? opener"
                          data-addclose="true"
                          data-bgcolor="#ce161c"
