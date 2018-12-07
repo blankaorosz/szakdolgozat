@@ -59,9 +59,9 @@
            <tr th:each="user : ${users}" th:id="'user-table-row-'+${user.id}"
                th:classappend="${#strings.isEmpty(user.password)} ? highlight">
 
-               <td th:text="${user.userName}"></td>
-               <td th:text="${user.agentCode}"></td>
-               <td th:text="${user.role.name}"></td>
+               <td th:id="'user-table-col-username-'+${user.id}" th:text="${user.userName}"></td>
+               <td th:id="'user-table-col-agentcode-'+${user.id}" th:text="${user.agentCode}"></td>
+               <td th:id="'user-table-col-rolename-'+${user.id}" th:text="${user.role.name}"></td>
                <td>
                    <button th:if="${user.role.name != T(hu.elte.szakdolgozat.spms.model.entity.spms.Role.RoleName).SALES}"
                            class="spms-button"

@@ -71,8 +71,8 @@ public class UserRestController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/save/{userId}")
-    public SpmsRestResponse saveUser(@PathVariable Long userId, @RequestBody CreateUserModel userModel) {
-        SpmsRestResponse response = new SpmsRestResponse();
+    public SpmsRestResponse<CreateUserModel> saveUser(@PathVariable Long userId, @RequestBody CreateUserModel userModel) {
+        SpmsRestResponse<CreateUserModel> response = new SpmsRestResponse();
 
         try {
             boolean updated = false;
@@ -92,11 +92,17 @@ public class UserRestController {
             }
 
             if (updated) {
-                userRepository.save(user);
+                user = userRepository.save(user);
             }
+
+            userModel.setId(user.getId());
+            userModel.setUserName(user.getUserName());
+            userModel.setUserRole(user.getRole().getName().name());
 
             response.setSuccess(true);
             response.setMessage("User has been updated!");
+            response.setContent(userModel);
+
         }catch (Exception ex) {
             response.setSuccess(false);
             String msg = String

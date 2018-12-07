@@ -44,7 +44,8 @@ function createUser() {
                 "                           onclick='deleteUser(" + data.content.id + ")'>" +
                 "                       delete" +
                 "                   </button>" +
-                "                   <button class='spms-button' onclick='editUser()'> edit </button>" +
+                "                   <button class='spms-button' " +
+                    "onclick='openEditUserDialog(" + data.content.id + ", \"" + data.content.userName + "\")'> edit </button>" +
                 "               </td>" +
                 "           </tr>");
 
@@ -149,6 +150,8 @@ function saveUser() {
         }).done(function (data) {
             if (data.success) {
                 $('#user-table-row-' + userId).removeClass("highlight");
+
+                $('#user-table-col-username-' + data.content.id).html(data.content.userName);
             }
 
             $("#close-user-modify-form-modal").click();

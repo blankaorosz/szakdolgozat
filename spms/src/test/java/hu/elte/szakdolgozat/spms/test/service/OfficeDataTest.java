@@ -9,6 +9,7 @@ import hu.elte.szakdolgozat.spms.service.CompanyAndOrderDataImporterService;
 import hu.elte.szakdolgozat.spms.util.DateUtil;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,27 +62,27 @@ public class OfficeDataTest {
     public void testCompanyImport() {
         Iterable<Company> companies = companyRepository.findAll();
         long companyCount = StreamSupport.stream(companies.spliterator(),false).count();
-        assertEquals(companyCount,10l);
+        assertEquals(companyCount,11l);
     }
 
     @Test
     public void testUserImport() {
         Iterable<User> users = userRepository.findAll();
         long userCount = StreamSupport.stream(users.spliterator(),false).count();
-        assertEquals(userCount,4l);
+        assertEquals(userCount,5l);
     }
 
     @Test
     public void testOrderItemImport() {
         Iterable<OrderItem> orderItems = orderItemRepository.findAll();
         long orderItemCount = StreamSupport.stream(orderItems.spliterator(),false).count();
-        assertEquals(orderItemCount,10l);
+        assertEquals(orderItemCount,277l);
     }
 
     @Test
     public void testOrderImport() {
         Iterable<Order> orders = ordersRepository.findAll();
         long orderCount = StreamSupport.stream(orders.spliterator(),false).count();
-        assertEquals(orderCount,5l);
+        assertEquals(orderCount,207l);
     }
 }
