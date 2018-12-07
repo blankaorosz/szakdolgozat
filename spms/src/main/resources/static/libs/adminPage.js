@@ -53,7 +53,7 @@ function createUser() {
 
             alert(data.message);
             $('#add-user-name').val("");
-            $('#add-user-role-name').val("");
+            $('#add-user-password').val("");
         });
     }
 }

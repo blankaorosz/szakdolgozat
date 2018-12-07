@@ -41,7 +41,7 @@ public class AuthenticationDbInitializer {
     private void init() throws IllegalArgumentException, IllegalAccessException {
         initRightIfEmpty();
         initRoleIfEmpty();
-        mockUser();
+        createAdminIfNotExist();
     }
     
     private void initRightIfEmpty() throws IllegalArgumentException, IllegalAccessException {
@@ -103,27 +103,18 @@ public class AuthenticationDbInitializer {
         
     }
      
-     private void mockUser() {
+     private void createAdminIfNotExist() {
+         User adminUser = userRepository.findByUserName("admin");
+         if (adminUser == null) {
+             adminUser = new User();
+             adminUser.setUserName("admin");
+             adminUser.setPassword(encoder.encode("admin"));
+             adminUser.setRole(roleRepository.findByName(Role.RoleName.ADMIN));
 
-         User user2 = new User();
-         user2.setUserName("Controller Cintia");
-         user2.setPassword(encoder.encode("asd"));
-         user2.setRole(roleRepository.findByName(Role.RoleName.CONTROLLER));
+             userRepository.save(adminUser);
+         }
 
-         userRepository.save(user2);
 
-         User adminUser = new User();
-         adminUser.setUserName("Admin Aladár");
-         adminUser.setPassword(encoder.encode("asd"));
-         adminUser.setRole(roleRepository.findByName(Role.RoleName.ADMIN));
 
-         userRepository.save(adminUser);
-
-         User ceoUser = new User();
-         ceoUser.setUserName("Ceo Cecil");
-         ceoUser.setPassword(encoder.encode("asd"));
-         ceoUser.setRole(roleRepository.findByName(Role.RoleName.CEO));
-
-         userRepository.save(ceoUser);
      }
 }

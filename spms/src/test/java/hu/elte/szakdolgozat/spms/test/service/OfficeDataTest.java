@@ -68,7 +68,7 @@ public class OfficeDataTest {
     public void testUserImport() {
         Iterable<User> users = userRepository.findAll();
         long userCount = StreamSupport.stream(users.spliterator(),false).count();
-        assertEquals(userCount,6l); //7 mocked users
+        assertEquals(userCount,4l);
     }
 
     @Test

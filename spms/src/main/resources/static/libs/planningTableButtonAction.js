@@ -1,4 +1,4 @@
-function savePlan() {
+function savePlan(onDoneCallback) {
     var planningTableCellArray = $(".planning-table-input-cell").map(function () {
         var planId = $(this).data("planid");
         var companyId = $(this).data("companyid");
@@ -24,24 +24,31 @@ function savePlan() {
     }).done(function (data) {
         if (!data.success) {
             alert(data.message);
+        } else if(onDoneCallback) {
+            onDoneCallback();
         }
     });
 }
 
 function setPlanStatus(planId, status) {
-    savePlan();
-    $.ajax({
-        type: "POST",
-        url: "/rest/plan/" + planId + "/status/" + status,
-        contentType: "application/json",
-    }).done(function (data) {
-        if(data.success) {
-           location.reload(true);
-        } else {
-            alert(data.message);
-        }
+        savePlan(function () {
+            $.ajax({
+                type: "POST",
+                url: "/rest/plan/" + planId + "/status/" + status,
+                contentType: "application/json",
+            }).done(function (data) {
+                if(data.success) {
+                    location.reload(true);
+                } else {
+                    alert(data.message);
+                }
 
-    });
+            });
+
+        })
+
+
+
 }
 
 function addComment(planId) {
