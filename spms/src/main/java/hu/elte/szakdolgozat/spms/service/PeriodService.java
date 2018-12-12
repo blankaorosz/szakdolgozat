@@ -60,6 +60,10 @@ public class PeriodService {
     private List<PlanPerCompany> initiatePlanPerCompaniesByUser(User user, Plan plan) {
         List<PlanPerCompany> planPerCompanyListByUser = new ArrayList<>(user.getCompanies().size());
         for (Company c : user.getCompanies()) {
+            if (!c.isActive()) {
+                continue;
+            }
+
             PlanPerCompany p = new PlanPerCompany();
             p.setCompany(c);
             p.setPlan(plan);

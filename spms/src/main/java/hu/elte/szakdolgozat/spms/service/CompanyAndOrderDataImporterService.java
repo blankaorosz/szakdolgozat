@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -39,6 +40,7 @@ public class CompanyAndOrderDataImporterService {
     @Autowired
     OfficeOrderItemDataRepository officeOrderItemDataRepository;
 
+    @Transactional
     public void importByRange(Date fromDate, Date toDate) {
         List<OfficeCompanyData> officeCompanyDataList = officeCompanyDataRepository.findAll();
 
@@ -149,8 +151,7 @@ public class CompanyAndOrderDataImporterService {
             User user = c.getUser();
             //check whether any user related update happened (there was no user or the user has been changed underneath)
             if (user == null
-                    || !user.getAgentCode().equals(officeCompanyData.getSalesAgentCode())
-                    || !user.getUserName().equals(officeCompanyData.getSalesUserName())) {
+                    || !user.getAgentCode().equals(officeCompanyData.getSalesAgentCode())) {
 
                 user = getOrCreateSalesUserForCompany(officeCompanyData);
 

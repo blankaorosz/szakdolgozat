@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
  * @author Blanka Orosz
  */
 @Entity
-@Table(name = "RIGHT")
+@Table(name = "RIGHTS")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
